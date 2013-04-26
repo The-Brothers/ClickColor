@@ -29,7 +29,7 @@ public:
 
 	SDL_Rect getBox();
 
-	void mudarCor();
+	void changeColor();
 };
 
 #endif

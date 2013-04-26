@@ -51,7 +51,7 @@ void Tabuleiro::click(int x, int y){
 	for (int i=0;i<this->quadrados.size();i++){
 		SDL_Rect temp = quadrados[i]->getBox();
 		if(	x >= temp.x && x <= temp.x + temp.w && y >= temp.y && y <= temp.y + temp.h){
-			quadrados[i]->mudarCor();
+			quadrados[i]->changeColor();
 
 			mudarAdjacente(i);
 		}
@@ -66,19 +66,19 @@ void Tabuleiro::mudarAdjacente(int i){
 	
 	for (int i = 0; i < quadrados.size(); ++i){
 		if(quadrados[i]->getI() == x-1 && quadrados[i]->getJ() == y){
-			quadrados[i]->mudarCor();
+			quadrados[i]->changeColor();
 			continue;
 		}
 		if(quadrados[i]->getI() == x+1 && quadrados[i]->getJ() == y){
-			quadrados[i]->mudarCor();
+			quadrados[i]->changeColor();
 			continue;
 		}
 		if(quadrados[i]->getJ() == y-1 && quadrados[i]->getI() == x){
-			quadrados[i]->mudarCor();
+			quadrados[i]->changeColor();
 			continue;
 		}
 		if(quadrados[i]->getJ() == y+1 && quadrados[i]->getI() == x){
-			quadrados[i]->mudarCor();
+			quadrados[i]->changeColor();
 			continue;
 		}
 	}

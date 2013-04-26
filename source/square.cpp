@@ -37,7 +37,7 @@ SDL_Rect Square::getBox(){
 	return this->box;
 }
 
-void Square::mudarCor(){
+void Square::changeColor(){
 	if(this->color == this->red){
 		this->color = this->yellow;
 	}
