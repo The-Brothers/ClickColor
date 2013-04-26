@@ -1,5 +1,5 @@
 #include "game.h"
-#include "tabuleiro.h"
+#include "board.h"
 
 Game::Game(){
 	SDL_Init(SDL_INIT_EVERYTHING);
@@ -8,7 +8,7 @@ Game::Game(){
 
 	this->running = true;
 
-	this->tabuleiro = new Tabuleiro(3);
+	this->board = new Board(3);
 }
 
 Game::~Game(){
@@ -32,18 +32,18 @@ void Game::run(){
 						int x = events.button.x;
 						int y = events.button.y;
 
-						if(this->tabuleiro->isClicked(x,y)){
-							this->tabuleiro->click(x,y);
+						if(this->board->isClicked(x,y)){
+							this->board->click(x,y);
 						}
 					}
 				break;
 			}
 		}
 		//Logic
-		this->tabuleiro->update();
+		this->board->update();
 
 		//Render
-		this->tabuleiro->draw();
+		this->board->draw();
 		// SDL_FillRect(screen,&screen->clip_rect,amarelo);
 
 		SDL_Flip(screen);

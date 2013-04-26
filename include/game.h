@@ -5,7 +5,7 @@
 #include "SDL/SDL_image.h"
 #include "timer.h"
 #include "util.h"
-#include "tabuleiro.h"
+#include "board.h"
 
 #define SCREEN_W 400
 #define SCREEN_H 500
@@ -24,7 +24,7 @@ class Game{
 	Uint32 start; //FPS control
 
 	//Game related
-	Tabuleiro* tabuleiro;
+	Board* board;
 public:
 	Game();
 	~Game();
