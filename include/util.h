@@ -7,6 +7,6 @@
 
 using namespace std;
 
-SDL_Surface * carregaImagem(const char* img);
+SDL_Surface * loadImage(const char* img);
 
 #endif

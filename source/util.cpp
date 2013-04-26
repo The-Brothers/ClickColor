@@ -2,36 +2,37 @@
 
 using namespace std;
 
-SDL_Surface * carregaImagem(const char* img){
-	// Deve-se fazer um tratamento para verificar a extensão da imagem
-	// Inicializa a imagem a se carregada
+SDL_Surface * loadImage(const char* img){
+	// TODO: check the image extension, like .png .bmp or .jpeg
+	// Initialize the surface that will load the image
 	SDL_Surface * loadedImage = NULL;
 	
-	// Inicializa a imagem otimizada
+	// Initialize the surface where the opitimized image will be loaded
 	SDL_Surface * optimizedImage =  NULL;
 	
-	// Carrega a imagem
-	//cout << "Abrindo: " << img.c_str() << endl;
+	// Loading the image
 	loadedImage = IMG_Load(img);
-	//loadedImage = SDL_LoadBMP(img.c_str());
 	
-	// Se a imagem foi carregada
+	//If the image wasn't loaded sucessfully
 	if(!loadedImage)
 	{
-		cout << "Erro ao abrir: " << SDL_GetError() << endl;
+		cout << "Error: " << SDL_GetError() << endl;
 		return NULL;
 	}
-	//cout << "Aberta com sucesso!" << endl;
-	// Cria a imagem otimizada
+	
+	// Time to optimize the loaded image
     optimizedImage = SDL_DisplayFormat(loadedImage);
     
-    // Libera a imagem antiga da memória
+    // Free the loadedImage surface from the memory
     SDL_FreeSurface(loadedImage);
     
-    // Fazer o colorKey
-    //Uint32 colorkey = SDL_MapRGB(optimizedImage->format,0x00,0xff,0xfc);
+    // Time to make the colorkeying
+    //TODO: Make a parameter where you pass the color you want to use for colokeying
+    // Load the color to do the colorkey
     Uint32 colorkey = SDL_MapRGB(optimizedImage->format,0xff,0x00,0xff);
+    // Apply the colorkey
     SDL_SetColorKey(optimizedImage, SDL_SRCCOLORKEY, colorkey);
 
+    //Return the optimized image
     return optimizedImage;
 }
