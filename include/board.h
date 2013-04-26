@@ -4,8 +4,8 @@
 #include "square.h"
 #include <vector>
 
-#define Board_WIDTH 300
-#define Board_HEIGHT 300
+#define BOARD_WIDTH 300
+#define BOARD_HEIGHT 300
 
 using namespace std;
 
