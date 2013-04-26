@@ -4,15 +4,20 @@
 #include "square.h"
 #include <vector>
 
+// defines the board width and height
 #define BOARD_WIDTH 300
 #define BOARD_HEIGHT 300
 
 using namespace std;
 
+//class Board, the place where the action happens!
 class Board{
+	//The structure where the positions and dimensions are stored.
 	SDL_Rect box;
 
+	// The number of squares size x size the board will have
 	int size;
+	// The squares that form the game board
 	vector<Square*> squares;
 
 	int x;

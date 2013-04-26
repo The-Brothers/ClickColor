@@ -23,12 +23,12 @@ class Game{
 
 	Uint32 start; //FPS control
 
-	//Game related
+	//The game board
 	Board* board;
 public:
-	Game();
-	~Game();
-	void run();
+	Game(); //Constructor
+	~Game(); //Destructor
+	void run(); //THE GAME
 };
 
 #endif

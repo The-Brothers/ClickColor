@@ -7,6 +7,7 @@
 
 using namespace std;
 
+//function to load images based on the name
 SDL_Surface * loadImage(const char* img);
 
 #endif
