@@ -20,16 +20,16 @@ class Square{
 	int i;
 	int j;
 
-	//private methods
-	void changeColor(); //change the square color
-
 public:
+
 	Square(int cor, int _x, int _y, int _w, int _h, int _i, int _j); //Constructor
 	~Square(); //Destructor
 	
 	void draw(); // Draws the square on the game screen
 	void update(); // Do the square logic
 	
+	//change the square color
+	void changeColor();
 
 	//Getters and setters
 	int getI();
