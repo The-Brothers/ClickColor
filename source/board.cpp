@@ -27,7 +27,7 @@ Board::~Board(){
 
 void Board::draw(){
 	
-	for(int i=0;i<squares.size();i++){
+	for(int i=0;i<(int)squares.size();i++){
 		SDL_Rect temp = squares[i]->getBox();
 		SDL_FillRect(SDL_GetVideoSurface(), &temp ,squares[i]->getCor());
 	}
@@ -48,7 +48,7 @@ bool Board::isClicked(int x, int y){
 }
 
 void Board::click(int x, int y){
-	for (int i=0;i<this->squares.size();i++){
+	for (int i=0;i<(int)this->squares.size();i++){
 		SDL_Rect temp = squares[i]->getBox();
 		if(	x >= temp.x && x <= temp.x + temp.w && y >= temp.y && y <= temp.y + temp.h){
 			squares[i]->changeColor();
@@ -64,7 +64,7 @@ void Board::changeNeighbors(int i){
 	x = this->squares[i]->getI();
 	y = this->squares[i]->getJ();
 	
-	for (int i = 0; i < squares.size(); ++i){
+	for (int i = 0; i <(int)squares.size(); ++i){
 		if(squares[i]->getI() == x-1 && squares[i]->getJ() == y){
 			squares[i]->changeColor();
 			continue;
