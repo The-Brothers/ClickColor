@@ -24,14 +24,14 @@ class Board{
 	int y;
 
 public: 
-	Board(int boardSize);
-	~Board();
-	void draw();
-	void update();
-	void nextLevel();
-	bool isClicked(int x, int y);
-	void click(int x, int y);
-	void changeNeighbors(int i);
+	Board(int boardSize); //Constructor
+	~Board();	//Destructor
+	void draw();	//Draw the Board on the screen
+	void update();	//Do the Board logic
+	void nextLevel();	//Change the Board layout according to the next level
+	bool isClicked(int x, int y);	//Check if the board was clicked
+	void click(int x, int y);	//performs a click on a square inside the Board
+	void changeNeighbors(int i);	//change the color of the cell number i neighbors
 };
 
 #endif
