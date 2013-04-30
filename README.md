@@ -16,5 +16,6 @@ Changelog:
 	- 0.1 -
 		- First version Playable 
 	- 0.2 -
+		- Internationalization and documentation of the code.
 
 ---------
