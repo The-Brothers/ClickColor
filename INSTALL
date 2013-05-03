@@ -1,2 +1,17 @@
+DEPENDENCIES
+============
+
+This is a project using C++ and the SDL libraries.
+TO run the game correctly you need the following packages installed:
+	- SDL
+	- SDL_image
+	- SDL_mixer
+	- SDL_ttf
+
+TODO: Create a .sh to install the dependencies needed for develop the project.
+
+INSTALL
+=======
+
 To install just run:
 	make install
