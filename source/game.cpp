@@ -15,6 +15,9 @@ Game::Game(){
 
 	//create a new board 3x3
 	this->board = new Board(3);
+
+	//Variable to count the number of clicks you made
+	this->clickCount = 0;
 }
 
 //Destructor
@@ -49,6 +52,7 @@ void Game::run(){
 						if(this->board->isClicked(x,y)){
 							//click on the square on the board with this positions
 							this->board->click(x,y);
+							this->clickCount++;
 						}
 					}
 				break;
