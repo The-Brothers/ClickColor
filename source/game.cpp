@@ -1,10 +1,12 @@
 #include "game.h"
 #include "board.h"
+#include "SDL/SDL_ttf.h"
 
 //Contructor
 Game::Game(){
 	//Initialize all the SDL shit
 	SDL_Init(SDL_INIT_EVERYTHING);
+	TTF_Init();
 	//Set the main screen, the screen where the magic happens!
 	this->screen = SDL_SetVideoMode(SCREEN_W,SCREEN_H,SCREEN_BPP,SDL_SWSURFACE);
 	//set the window title
@@ -24,6 +26,8 @@ Game::Game(){
 Game::~Game(){
 	//Free the screen surface
 	SDL_FreeSurface(this->screen);
+	//Close the TTF elements
+	TTF_Quit();
 	//Quit the SDL elements
 	SDL_Quit();
 }
@@ -53,6 +57,7 @@ void Game::run(){
 							//click on the square on the board with this positions
 							this->board->click(x,y);
 							this->clickCount++;
+							cout << this->clickCount << endl;
 						}
 					}
 				break;
