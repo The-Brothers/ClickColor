@@ -39,7 +39,7 @@ Game::~Game(){
 //
 void Game::run(){
 
-	Gui* victoryMessage = new Gui(string("You won!"),40,SCREEN_W/2,SCREEN_H/2);
+	Gui* victoryMessage = new Gui(string("You won!"),40,SCREEN_W/2,SDL_GetVideoSurface()->h/4 * 3);
 
 	while(this->running){
 		this->start = SDL_GetTicks();
@@ -85,9 +85,8 @@ void Game::run(){
 
 		//Check if all the squares have the same color
 		if(this->board->isVictory()){
-			// cout << "You won!" <<endl;
 			victoryMessage->draw();
-			victoryMessage->update();
+			// victoryMessage->update();
 			SDL_Flip(screen);
 			SDL_Delay(2000);
 

@@ -4,7 +4,6 @@
 using namespace std;
 
 Gui::Gui(){
-
 //TODO: Valores entrados pelo usuário
 //TODO: Criar contrutor genérico e construtor do usuário
 	this->box.x = 10;
@@ -18,6 +17,7 @@ Gui::Gui(){
 
 	this->renderType = BLENDED;
 
+	update();
 }
 
 Gui::Gui(string _text, int _fontsize){
@@ -33,6 +33,10 @@ Gui::Gui(string _text, int _fontsize){
 	if(this->font==NULL)
 		cout << TTF_GetError() << endl;
 	this->text = _text;
+
+	this->renderType = BLENDED;
+
+	update();
 }
 
 Gui::Gui(string _text, int _fontsize, int x, int y){
@@ -48,6 +52,10 @@ Gui::Gui(string _text, int _fontsize, int x, int y){
 	if(this->font==NULL)
 		cout << TTF_GetError() << endl;
 	this->text = _text;
+
+	this->renderType = BLENDED;
+
+	update();
 }
 
 Gui::~Gui(){
