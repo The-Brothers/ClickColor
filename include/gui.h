@@ -48,8 +48,8 @@ public:
 	void update();
 
 	void setText(string _text);
-	void setColor(int r, int g, int b);
-	void setShadedColor(int r, int g, int b);
+	void setColor(Color _color);
+	void setShadedColor(Color _color);
 	void setFontSize(int size);
 	void setRenderType(int _renderType);
 

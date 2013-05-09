@@ -44,7 +44,7 @@ TARGET		:=	$(notdir $(CURDIR))
 LIBS	:=	-lSDL -lSDL_image -lSDL_mixer -lSDL_ttf   
 			
 # Flags
-CPPFLAGS=-Wall -g -W -pedantic -ansi
+CPPFLAGS=-Wall -g -W -pedantic -ansi -std=c++0x
 
 # Linking flags
 LDFLAGS= $(LIBS)

@@ -84,13 +84,35 @@ void Gui::setText(string _text){
 	this->text = _text;
 }
 
-// void Gui::setColor(int r, int g, int b){
-// 	this->color = {r,g,b,0};
-// }
+void Gui::setColor(Color _color){
+	switch(_color){
+		case RED:
+			this->color = {0xff,0x00,0x00,0x00};
+		case GREEN:
+			this->color = {0x00,0xff,0x00,0x00};
+		case BLUE:
+			this->color = {0x00,0x00,0xff,0x00};
+		case WHITE:
+			this->color = {0xff,0xff,0xff,0x00};
+		case BLACK:
+			this->color = {0x00,0x00,0x00,0x00};
+	}
+}
 
-// void Gui::setShadedColor(int r, int g, int b){
-// 	this->shadedColor = {r,g,b,0};	
-// }
+void Gui::setShadedColor(Color _color){
+	switch(_color){
+		case RED:
+			this->shadedColor = {0xff,0x00,0x00,0x00};
+		case GREEN:
+			this->shadedColor = {0x00,0xff,0x00,0x00};
+		case BLUE:
+			this->shadedColor = {0x00,0x00,0xff,0x00};
+		case WHITE:
+			this->shadedColor = {0xff,0xff,0xff,0x00};
+		case BLACK:
+			this->shadedColor = {0x00,0x00,0x00,0x00};
+	}
+}
 
 void Gui::setFontSize(int size){
 	this->fontsize = size;
