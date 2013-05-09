@@ -67,6 +67,12 @@ void Game::run(){
 		//Logic
 		this->board->update();
 
+		if(this->board->isVictory()){
+			cout << "You won!" << endl;
+			this->clickCount = 0;
+			this->board = new Board(3);
+		}
+
 		//Render -> draw on the screen surface
 		this->board->draw();
 

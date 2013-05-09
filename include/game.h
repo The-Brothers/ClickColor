@@ -13,6 +13,11 @@
 
 #define FPS 30
 
+enum GameEstate{
+	PLAYING,
+	END_GAME
+};
+
 class Game{
 
 	//Configs
