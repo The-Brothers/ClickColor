@@ -53,8 +53,9 @@ void Board::nextLevel(){
 //check if the board was clicked or not
 bool Board::isClicked(int x, int y){
 	//if the mouse click is inside the board coordinates
-	if(((x >= this->box.x) && (x<= (this->box.x + this->box.w))) && ((y >= this->box.y) && (y<= (this->box.y + this->box.h))))
+	if(((x >= this->box.x) && (x<= (this->box.x + this->box.w))) && ((y >= this->box.y) && (y<= (this->box.y + this->box.h)))){
 		return true; //true for "You clicked on the board!"
+    }
 	return false; //false for "You clicked outside the board!"
 }
 
@@ -103,3 +104,4 @@ void Board::changeNeighbors(int i){
 		}
 	}
 }
+
