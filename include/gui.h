@@ -40,13 +40,13 @@ class Gui{
 
 public:
 	Gui();
-	Gui(char* _text, int _fontsize);
+	Gui(string _text, int _fontsize);
 	~Gui();
 
 	void draw();
 	void update();
 
-	void setText(char* _text);
+	void setText(string _text);
 	void setColor(int r, int g, int b);
 	void setShadedColor(int r, int g, int b);
 	void setFontSize(int size);

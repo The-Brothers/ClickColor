@@ -6,6 +6,7 @@
 #include "timer.h"
 #include "util.h"
 #include "board.h"
+#include "gui.h"
 
 #define SCREEN_W 400
 #define SCREEN_H 500
@@ -31,6 +32,7 @@ class Game{
 
 	//The game board
 	Board* board;
+	Gui* clicks;
 
 	//Variable to count the number of clicks you made
 	int clickCount;

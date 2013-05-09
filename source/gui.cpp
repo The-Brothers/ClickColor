@@ -14,13 +14,13 @@ Gui::Gui(){
 	SDL_Color _color = {255,255,255,0};
 	this->color = _color;
 	this->text ="teste";
-	this->font = TTF_OpenFont("data/Arista.ttf",this->fontsize);
+	this->font = TTF_OpenFont("data/font/Arista.ttf",this->fontsize);
 
 	this->renderType = BLENDED;
 
 }
 
-Gui::Gui(char* _text, int _fontsize){
+Gui::Gui(string _text, int _fontsize){
 
 	this->box.x = 10;
 	this->box.y = SDL_GetVideoSurface()->h/4 * 3;
@@ -29,8 +29,9 @@ Gui::Gui(char* _text, int _fontsize){
 	this->color = _color;
 	
 	this->fontsize = _fontsize;
-	this->font = TTF_OpenFont("data/Arista.ttf",this->fontsize);
-
+	this->font = TTF_OpenFont("data/font/Arista.ttf",this->fontsize);
+	if(this->font==NULL)
+		cout << TTF_GetError() << endl;
 	this->text = _text;
 }
 
@@ -56,17 +57,17 @@ void Gui::update(){
 	}
 }
 
-void Gui::setText(char* _text){
+void Gui::setText(string _text){
 	this->text = _text;
 }
 
-void Gui::setColor(int r, int g, int b){
-	this->color = {r,g,b,0};
-}
+// void Gui::setColor(int r, int g, int b){
+// 	this->color = {r,g,b,0};
+// }
 
-void Gui::setShadedColor(int r, int g, int b){
-	this->shadedColor = {r,g,b,0};	
-}
+// void Gui::setShadedColor(int r, int g, int b){
+// 	this->shadedColor = {r,g,b,0};	
+// }
 
 void Gui::setFontSize(int size){
 	this->fontsize = size;

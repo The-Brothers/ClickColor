@@ -20,6 +20,10 @@ Game::Game(){
 
 	//Variable to count the number of clicks you made
 	this->clickCount = 0;
+
+	//create a gui to write the clicks you made
+	this->clicks = new Gui(string("0"),40);
+
 }
 
 //Destructor
@@ -59,7 +63,9 @@ void Game::run(){
 
 							//Count the number of clicks you made
 							this->clickCount++;
-							// cout << this->clickCount << endl;
+							char temp[5];
+							sprintf(temp,"%d",this->clickCount);
+							this->clicks->setText(string(temp));
 						}
 					}
 				break;
@@ -68,18 +74,25 @@ void Game::run(){
 
 		//Logic
 		this->board->update();
-
+		this->clicks->update();
 		//Check if all the squares have the same color
 		if(this->board->isVictory()){
 			cout << "You won!" << endl;
+			
 			//Resets the click count
 			this->clickCount = 0;
+			char temp[5];
+			sprintf(temp,"%d",this->clickCount);
+			this->clicks->setText(string(temp));
+
 			//Resets the board
 			this->board = new Board(4);
 		}
 
 		//Render -> draw on the screen surface
+		SDL_FillRect(SDL_GetVideoSurface(),NULL,SDL_MapRGB(SDL_GetVideoSurface()->format,0x00,0x00,0x00));
 		this->board->draw();
+		this->clicks->draw();
 
 		//Draw the screen surface on the screen
 		SDL_Flip(screen);
