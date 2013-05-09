@@ -1,10 +1,12 @@
 #include "game.h"
 #include "board.h"
+#include "SDL/SDL_ttf.h"
 
 //Contructor
 Game::Game(){
 	//Initialize all the SDL shit
 	SDL_Init(SDL_INIT_EVERYTHING);
+	TTF_Init();
 	//Set the main screen, the screen where the magic happens!
 	this->screen = SDL_SetVideoMode(SCREEN_W,SCREEN_H,SCREEN_BPP,SDL_SWSURFACE);
 	//set the window title
@@ -13,8 +15,13 @@ Game::Game(){
 	//Set the game running
 	this->running = true;
 
+<<<<<<< HEAD
 	//create a new board nxn
 	this->board = new Board(6);
+=======
+	//create a new board 3x3
+	this->board = new Board(3);
+>>>>>>> end-game
 
 	//Variable to count the number of clicks you made
 	this->clickCount = 0;
@@ -24,6 +31,8 @@ Game::Game(){
 Game::~Game(){
 	//Free the screen surface
 	SDL_FreeSurface(this->screen);
+	//Close the TTF elements
+	TTF_Quit();
 	//Quit the SDL elements
 	SDL_Quit();
 }
@@ -52,7 +61,13 @@ void Game::run(){
 						if(this->board->isClicked(x,y)){
 							//click on the square on the board with this positions
 							this->board->click(x,y);
+<<<<<<< HEAD
 							this->clickCount++;
+=======
+							//Count the number of clicks you made
+							this->clickCount++;
+							// cout << this->clickCount << endl;
+>>>>>>> end-game
 						}
 					}
 				break;
@@ -61,6 +76,15 @@ void Game::run(){
 
 		//Logic
 		this->board->update();
+
+		//Check if all the squares have the same color
+		if(this->board->isVictory()){
+			cout << "You won!" << endl;
+			//Resets the click count
+			this->clickCount = 0;
+			//Resets the board
+			this->board = new Board(3);
+		}
 
 		//Render -> draw on the screen surface
 		this->board->draw();

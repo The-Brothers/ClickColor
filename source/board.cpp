@@ -82,24 +82,42 @@ void Board::changeNeighbors(int i){
 	//get the clicked square column
 	y = this->squares[i]->getJ();
 
-
+	//TODO: Optimize this "for"
 	//Go through all the squares on the board and check if they are the clicked square
-	for (int i = 0; i <(int)squares.size(); ++i){
-		if(squares[i]->getI() == x-1 && squares[i]->getJ() == y){
-			squares[i]->changeColor();
+	for (int i = 0; i <(int)this->squares.size(); ++i){
+		if(this->squares[i]->getI() == x-1 && this->squares[i]->getJ() == y){
+			this->squares[i]->changeColor();
 			continue;
 		}
-		if(squares[i]->getI() == x+1 && squares[i]->getJ() == y){
-			squares[i]->changeColor();
+		if(this->squares[i]->getI() == x+1 && this->squares[i]->getJ() == y){
+			this->squares[i]->changeColor();
 			continue;
 		}
-		if(squares[i]->getJ() == y-1 && squares[i]->getI() == x){
-			squares[i]->changeColor();
+		if(this->squares[i]->getJ() == y-1 && this->squares[i]->getI() == x){
+			this->squares[i]->changeColor();
 			continue;
 		}
-		if(squares[i]->getJ() == y+1 && squares[i]->getI() == x){
-			squares[i]->changeColor();
+		if(this->squares[i]->getJ() == y+1 && this->squares[i]->getI() == x){
+			this->squares[i]->changeColor();
 			continue;
 		}
 	}
 }
+<<<<<<< HEAD
+=======
+
+//TODO: Optimize this method
+//go through the board to check if it is color uniform
+bool Board::isVictory(){
+	//get the color from the first square
+	Uint32 tempColor = this->squares.at(0)->getCor();
+	
+	for(int i=0;i<(int)this->squares.size();i++){
+		//if the square color is different from the color from the first square
+		if(this->squares.at(i)->getCor() != tempColor)
+			return false;
+	}
+	//if all the colors are the same
+	return true;
+}
+>>>>>>> end-game

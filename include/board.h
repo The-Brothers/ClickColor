@@ -32,6 +32,8 @@ public:
 	bool isClicked(int x, int y);	//Check if the board was clicked
 	void click(int x, int y);	//performs a click on a square inside the Board
 	void changeNeighbors(int i);	//change the color of the cell number i neighbors
+
+	bool isVictory(); //go through the board to check if it is color uniform
 };
 
 #endif
