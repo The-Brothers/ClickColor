@@ -64,7 +64,9 @@ void Game::run(){
 		//Draw the screen surface on the screen
 		SDL_Flip(screen);
 		//FPS control
-		if(1000/FPS > SDL_GetTicks() - this->start)
+		if(1000/FPS > SDL_GetTicks() - this->start){
 			SDL_Delay(1000/FPS - (SDL_GetTicks() - this->start));
+        }
 	}
 }
+

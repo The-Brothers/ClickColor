@@ -11,3 +11,4 @@ using namespace std;
 SDL_Surface * loadImage(const char* img);
 
 #endif
+

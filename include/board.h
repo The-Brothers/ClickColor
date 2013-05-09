@@ -23,7 +23,7 @@ class Board{
 	int x;
 	int y;
 
-public: 
+public:
 	Board(int boardSize); //Constructor
 	~Board();	//Destructor
 	void draw();	//Draw the Board on the screen
@@ -35,3 +35,4 @@ public:
 };
 
 #endif
+

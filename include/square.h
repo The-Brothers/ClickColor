@@ -24,10 +24,10 @@ public:
 
 	Square(int cor, int _x, int _y, int _w, int _h, int _i, int _j); //Constructor
 	~Square(); //Destructor
-	
+
 	void draw(); // Draws the square on the game screen
 	void update(); // Do the square logic
-	
+
 	//change the square color
 	void changeColor();
 
@@ -41,3 +41,4 @@ public:
 };
 
 #endif
+
