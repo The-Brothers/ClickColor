@@ -39,6 +39,8 @@ Game::~Game(){
 //
 void Game::run(){
 
+	Gui* victoryMessage = new Gui(string("You won!"),40,SCREEN_W/2,SCREEN_H/2);
+
 	while(this->running){
 		this->start = SDL_GetTicks();
 		//Events
@@ -75,10 +77,20 @@ void Game::run(){
 		//Logic
 		this->board->update();
 		this->clicks->update();
+
+		//Render -> draw on the screen surface
+		SDL_FillRect(SDL_GetVideoSurface(),NULL,SDL_MapRGB(SDL_GetVideoSurface()->format,0x00,0x00,0x00));
+		this->board->draw();
+		this->clicks->draw();
+
 		//Check if all the squares have the same color
 		if(this->board->isVictory()){
-			cout << "You won!" << endl;
-			
+			cout << "You won!" <<endl;
+			victoryMessage->draw();
+			victoryMessage->update();
+			SDL_Flip(screen);
+			SDL_Delay(2000);
+
 			//Resets the click count
 			this->clickCount = 0;
 			char temp[5];
@@ -88,11 +100,6 @@ void Game::run(){
 			//Resets the board
 			this->board = new Board(3);
 		}
-
-		//Render -> draw on the screen surface
-		SDL_FillRect(SDL_GetVideoSurface(),NULL,SDL_MapRGB(SDL_GetVideoSurface()->format,0x00,0x00,0x00));
-		this->board->draw();
-		this->clicks->draw();
 
 		//Draw the screen surface on the screen
 		SDL_Flip(screen);

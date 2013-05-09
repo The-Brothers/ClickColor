@@ -35,6 +35,21 @@ Gui::Gui(string _text, int _fontsize){
 	this->text = _text;
 }
 
+Gui::Gui(string _text, int _fontsize, int x, int y){
+
+	this->box.x = x;
+	this->box.y = y;
+
+	SDL_Color _color = {255,255,255,0};
+	this->color = _color;
+	
+	this->fontsize = _fontsize;
+	this->font = TTF_OpenFont("data/font/Arista.ttf",this->fontsize);
+	if(this->font==NULL)
+		cout << TTF_GetError() << endl;
+	this->text = _text;
+}
+
 Gui::~Gui(){
 	TTF_CloseFont(this->font);
 }

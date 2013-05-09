@@ -41,6 +41,7 @@ class Gui{
 public:
 	Gui();
 	Gui(string _text, int _fontsize);
+	Gui(string _text, int _fontsize, int x, int y);
 	~Gui();
 
 	void draw();
