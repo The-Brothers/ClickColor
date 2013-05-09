@@ -6,7 +6,7 @@ using namespace std;
 
 //Constructor
 Board::Board(int boardSize){
-	
+
 	//Set the position of the board on the screen and it's dimensions
 	this->box.x = 0;
 	this->box.y = 0;
@@ -16,10 +16,12 @@ Board::Board(int boardSize){
 	for(int i=0;i<boardSize;i++){ //The line
 		for(int j=0;j<boardSize;j++){ //The Column
 			//configure the board to paint it based on the position on the board
-			if((j+i)%2==0)
-				squares.push_back(new Square(1,(j*BOARD_WIDTH/boardSize)+this->box.x,(i*BOARD_HEIGHT/boardSize)+this->box.y,100,100,i,j));
-			else
-				squares.push_back(new Square(0,(j*BOARD_WIDTH/boardSize)+this->box.x,(i*BOARD_HEIGHT/boardSize)+this->box.y,100,100,i,j));
+			if((j+i)%2==0){
+				squares.push_back(new Square(1,(j*BOARD_WIDTH/boardSize)+this->box.x,(i*BOARD_HEIGHT/boardSize)+this->box.y,BOARD_WIDTH/boardSize,BOARD_HEIGHT/boardSize,i,j));
+            }
+			else{
+				squares.push_back(new Square(0,(j*BOARD_WIDTH/boardSize)+this->box.x,(i*BOARD_HEIGHT/boardSize)+this->box.y,BOARD_WIDTH/boardSize,BOARD_HEIGHT/boardSize,i,j));
+            }
 		}
 	}
 }
@@ -75,7 +77,7 @@ void Board::click(int x, int y){
 void Board::changeNeighbors(int i){
 	int x, y;
 
-	//get the clicked square line 
+	//get the clicked square line
 	x = this->squares[i]->getI();
 	//get the clicked square column
 	y = this->squares[i]->getJ();
