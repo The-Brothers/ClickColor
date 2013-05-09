@@ -85,7 +85,7 @@ void Game::run(){
 
 		//Check if all the squares have the same color
 		if(this->board->isVictory()){
-			cout << "You won!" <<endl;
+			// cout << "You won!" <<endl;
 			victoryMessage->draw();
 			victoryMessage->update();
 			SDL_Flip(screen);
