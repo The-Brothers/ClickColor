@@ -13,8 +13,8 @@ Game::Game(){
 	//Set the game running
 	this->running = true;
 
-	//create a new board 3x3
-	this->board = new Board(3);
+	//create a new board nxn
+	this->board = new Board(6);
 }
 
 //Destructor
