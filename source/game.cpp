@@ -16,7 +16,7 @@ Game::Game(){
 	this->running = true;
 
 	//create a new board nxn
-	this->board = new Board(6);
+	this->board = new Board(3);
 
 	//Variable to count the number of clicks you made
 	this->clickCount = 0;
@@ -75,7 +75,7 @@ void Game::run(){
 			//Resets the click count
 			this->clickCount = 0;
 			//Resets the board
-			this->board = new Board(3);
+			this->board = new Board(4);
 		}
 
 		//Render -> draw on the screen surface
