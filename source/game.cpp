@@ -56,8 +56,9 @@ void Game::run(){
 						if(this->board->isClicked(x,y)){
 							//click on the square on the board with this positions
 							this->board->click(x,y);
+							//Count the number of clicks you made
 							this->clickCount++;
-							cout << this->clickCount << endl;
+							// cout << this->clickCount << endl;
 						}
 					}
 				break;
@@ -67,9 +68,12 @@ void Game::run(){
 		//Logic
 		this->board->update();
 
+		//Check if all the squares have the same color
 		if(this->board->isVictory()){
 			cout << "You won!" << endl;
+			//Resets the click count
 			this->clickCount = 0;
+			//Resets the board
 			this->board = new Board(3);
 		}
 
