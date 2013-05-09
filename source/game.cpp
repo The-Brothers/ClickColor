@@ -86,7 +86,7 @@ void Game::run(){
 			this->clicks->setText(string(temp));
 
 			//Resets the board
-			this->board = new Board(4);
+			this->board = new Board(3);
 		}
 
 		//Render -> draw on the screen surface
