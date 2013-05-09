@@ -15,13 +15,8 @@ Game::Game(){
 	//Set the game running
 	this->running = true;
 
-<<<<<<< HEAD
 	//create a new board nxn
 	this->board = new Board(6);
-=======
-	//create a new board 3x3
-	this->board = new Board(3);
->>>>>>> end-game
 
 	//Variable to count the number of clicks you made
 	this->clickCount = 0;
@@ -61,13 +56,10 @@ void Game::run(){
 						if(this->board->isClicked(x,y)){
 							//click on the square on the board with this positions
 							this->board->click(x,y);
-<<<<<<< HEAD
-							this->clickCount++;
-=======
+
 							//Count the number of clicks you made
 							this->clickCount++;
 							// cout << this->clickCount << endl;
->>>>>>> end-game
 						}
 					}
 				break;

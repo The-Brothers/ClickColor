@@ -103,8 +103,6 @@ void Board::changeNeighbors(int i){
 		}
 	}
 }
-<<<<<<< HEAD
-=======
 
 //TODO: Optimize this method
 //go through the board to check if it is color uniform
@@ -120,4 +118,3 @@ bool Board::isVictory(){
 	//if all the colors are the same
 	return true;
 }
->>>>>>> end-game
