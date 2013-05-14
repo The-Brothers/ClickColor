@@ -22,7 +22,7 @@ Game::Game(){
 	this->clickCount = 0;
 
 	//create a gui to write the clicks you made
-	this->clicks = new Gui(string("0"),40,380,160);
+	this->clicks = new Gui(string("0"),32,380,170);
 	this->clicks->setColor(BLACK);
 
 	//load the game interface

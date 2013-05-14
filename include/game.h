@@ -23,7 +23,6 @@ class Game{
 
 	//Configs
 	SDL_Surface* screen; //the game screen
-	SDL_Surface* score;
 	SDL_Event events; //the ingame events
 
 	bool running; //sets the game running
@@ -37,6 +36,8 @@ class Game{
 
 	//Variable to count the number of clicks you made
 	int clickCount;
+	int levelCounter;
+
 public:
 	Game(); //Constructor
 	~Game(); //Destructor
