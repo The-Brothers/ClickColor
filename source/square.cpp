@@ -6,14 +6,14 @@ using namespace std;
 //Constructor
 Square::Square(int cor, int _x, int _y, int _w, int _h, int _i, int _j){
 	//TODO: Put this somewherelse
-	this->red = SDL_MapRGB(SDL_GetVideoSurface()->format,0xff,0x00,0x00);
-	this->yellow = SDL_MapRGB(SDL_GetVideoSurface()->format,0xff,0xff,0x00);
+	this->color1 = SDL_MapRGB(SDL_GetVideoSurface()->format,0xc9,0x53,0x87);
+	this->color2 = SDL_MapRGB(SDL_GetVideoSurface()->format,0xcd,0xdb,0x74);
 
 	//Choose the color based on the parameter
 	if(cor==1)
-		this->color = red;
+		this->color = color1;
 	else
-		this->color = yellow;
+		this->color = color2;
 	
 	//set the quare dimensions and position
 	this->box.x = _x;
@@ -47,11 +47,11 @@ SDL_Rect Square::getBox(){
 
 //switch the color of the square
 void Square::changeColor(){
-	if(this->color == this->red){
-		this->color = this->yellow;
+	if(this->color == this->color1){
+		this->color = this->color2;
 	}
 	else
-		this->color = this->red;
+		this->color = this->color1;
 }
 
 //return the I and J, that are the postion of the square on the matrix

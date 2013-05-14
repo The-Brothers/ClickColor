@@ -1,5 +1,6 @@
 #include "game.h"
 #include "board.h"
+#include "util.h"
 #include "SDL/SDL_ttf.h"
 
 //Contructor
@@ -14,7 +15,6 @@ Game::Game(){
 
 	//Set the game running
 	this->running = true;
-
 	//create a new board nxn
 	this->board = new Board(3);
 
@@ -22,8 +22,11 @@ Game::Game(){
 	this->clickCount = 0;
 
 	//create a gui to write the clicks you made
-	this->clicks = new Gui(string("0"),40);
+	this->clicks = new Gui(string("0"),32,380,170);
+	this->clicks->setColor(BLACK);
 
+	//load the game interface
+	this->interface = loadImage("./data/image/ui.png");
 }
 
 //Destructor
@@ -39,8 +42,8 @@ Game::~Game(){
 //
 void Game::run(){
 
-	Gui* victoryMessage = new Gui(string("You won!"),40,SCREEN_W/2,SDL_GetVideoSurface()->h/4 * 3);
-
+	Gui* victoryMessage = new Gui(string("You won!"),32,340,290);
+	victoryMessage->setColor(RED);
 	while(this->running){
 		this->start = SDL_GetTicks();
 		//Events
@@ -79,7 +82,8 @@ void Game::run(){
 		this->clicks->update();
 
 		//Render -> draw on the screen surface
-		SDL_FillRect(SDL_GetVideoSurface(),NULL,SDL_MapRGB(SDL_GetVideoSurface()->format,0x00,0x00,0x00));
+		// SDL_FillRect(SDL_GetVideoSurface(),NULL,SDL_MapRGB(SDL_GetVideoSurface()->format,0x00,0x00,0x00));
+		SDL_BlitSurface(this->interface,NULL,SDL_GetVideoSurface(),NULL);
 		this->board->draw();
 		this->clicks->draw();
 

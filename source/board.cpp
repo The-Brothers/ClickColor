@@ -8,8 +8,8 @@ using namespace std;
 Board::Board(int boardSize){
 
 	//Set the position of the board on the screen and it's dimensions
-	this->box.x = 0;
-	this->box.y = 0;
+	this->box.x = 30;
+	this->box.y = 32;
 	this->box.w = BOARD_WIDTH;
 	this->box.h = BOARD_HEIGHT;
 

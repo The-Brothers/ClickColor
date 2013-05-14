@@ -10,7 +10,7 @@ Gui::Gui(){
 	this->box.y = SDL_GetVideoSurface()->h/4 * 3;
 
 	this->fontsize = 40;
-	SDL_Color _color = {255,255,255,0};
+	SDL_Color _color = {0,0,0,0};
 	this->color = _color;
 	this->text ="teste";
 	this->font = TTF_OpenFont("data/font/Arista.ttf",this->fontsize);
@@ -25,7 +25,7 @@ Gui::Gui(string _text, int _fontsize){
 	this->box.x = 10;
 	this->box.y = SDL_GetVideoSurface()->h/4 * 3;
 
-	SDL_Color _color = {255,255,255,0};
+	SDL_Color _color = {0,0,0,0};
 	this->color = _color;
 	
 	this->fontsize = _fontsize;
@@ -44,7 +44,7 @@ Gui::Gui(string _text, int _fontsize, int x, int y){
 	this->box.x = x;
 	this->box.y = y;
 
-	SDL_Color _color = {255,255,255,0};
+	SDL_Color _color = {0,0,0,0};
 	this->color = _color;
 	
 	this->fontsize = _fontsize;
