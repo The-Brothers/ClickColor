@@ -7,8 +7,8 @@ class Square{
 
 	//Colors
 	//TODO: those colors must be somewhere else, like a library of colors
-	Uint32 red;
-	Uint32 yellow;
+	Uint32 color1;
+	Uint32 color2;
 
 	// The square color
 	Uint32 color;
