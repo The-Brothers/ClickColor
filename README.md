@@ -19,6 +19,7 @@ Features
 --------
 * Menu.
 * New levels and level progression.
+* Click Count
 
 Authors
 -------
