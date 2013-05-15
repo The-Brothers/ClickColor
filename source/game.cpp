@@ -53,6 +53,16 @@ void Game::run(){
 				case SDL_QUIT:
 					this->running = false;
 				break;
+  				
+  				//on key press ESC Exit game
+  				case SDL_KEYDOWN:
+                    switch (events.key.keysym.sym) {
+                    	case SDLK_ESCAPE:
+                        	this->running = false;
+                        break;
+                    	default:
+	                    break;
+                  	}
 
 				//if you click with the mouse
 				case SDL_MOUSEBUTTONDOWN:
