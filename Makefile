@@ -9,44 +9,41 @@ SOURCES		:=	source
 DATA		:=	data
 INCLUDES	:=	include
 
+#Target name
+TARGET		:=	$(notdir $(CURDIR))
 
 #---------------------------------------------------------------------------------
 # automatically build a list of object files for our project
 #---------------------------------------------------------------------------------
 CFILES		:=	$(foreach dir,$(SOURCES),$(notdir $(wildcard $(dir)/*.c)))
 CPPFILES	:=  $(foreach dir,$(SOURCES),$(notdir $(wildcard $(dir)/*.cpp)))
-BINFILES	:=	$(foreach dir,$(DATA),$(notdir $(wildcard $(dir)/*.*)))
 
+# Object files
+export OFILES	:=	 $(addprefix $(BUILD)/,$(CPPFILES:.cpp=.o))			
+
+					
+CPPFILES	:=   $(addprefix $(SOURCES)/,$(CPPFILES))
 
 
 #---------------------------------------------------------------------------------
 # use CXX for linking C++ projects, CC for standard C
 #---------------------------------------------------------------------------------
 
+
+# Compiler
 export LD	:=	$(CXX)
-
-
-export OFILES	:=	 $(addprefix $(BUILD)/,$(CPPFILES:.cpp=.o))
-					
-					
-CPPFILES	:=   $(addprefix $(SOURCES)/,$(CPPFILES))
 
 #---------------------------------------------------------------------------------
 # build a list of include paths
 #---------------------------------------------------------------------------------
 export INCLUDE	:=	$(foreach dir,$(INCLUDES), -I$(CURDIR)/$(dir)) \
 					-I$(CURDIR)/$(BUILD)
-										
-# Compiler
-TARGET		:=	$(notdir $(CURDIR))
-# Object files
-
-LIBS	:=	-lSDL -lSDL_image -lSDL_mixer -lSDL_ttf   
 			
 # Flags
 CPPFLAGS=-Wall -g -W -pedantic -ansi -std=c++0x
 
 # Linking flags
+LIBS	:=	-lSDL -lSDL_image -lSDL_mixer -lSDL_ttf   
 LDFLAGS= $(LIBS)
 
 $(BUILD)/%.o:$(SOURCES)/%.cpp
@@ -65,6 +62,10 @@ clean:
 	@echo clean ...
 	@rm -rf $(BUILD)
 	@rm -f $(TARGET)
+
+run:
+	@echo Running $(TARGET)
+	@./$(TARGET)
 
 install:
 	@sudo mkdir -p /opt/$(TARGET)
