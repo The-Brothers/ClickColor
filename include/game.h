@@ -42,6 +42,7 @@ public:
 	Game(); //Constructor
 	~Game(); //Destructor
 	void run(); //THE GAME
+	void handleEvents();
 };
 
 #endif
