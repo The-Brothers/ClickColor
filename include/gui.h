@@ -39,8 +39,6 @@ class Gui{
 	RenderType renderType;
 
 public:
-	Gui();
-	Gui(string _text, int _fontsize);
 	Gui(string _text, int _fontsize, int x, int y);
 	~Gui();
 
@@ -51,6 +49,7 @@ public:
 	void setColor(Color _color);
 	void setShadedColor(Color _color);
 	void setFontSize(int size);
+	void setFont(string _fontpath);
 	void setRenderType(int _renderType);
 
 };

@@ -3,44 +3,7 @@
 
 using namespace std;
 
-Gui::Gui(){
-//TODO: Valores entrados pelo usuário
-//TODO: Criar contrutor genérico e construtor do usuário
-	this->box.x = 10;
-	this->box.y = SDL_GetVideoSurface()->h/4 * 3;
-
-	this->fontsize = 40;
-	SDL_Color _color = {0,0,0,0};
-	this->color = _color;
-	this->text ="teste";
-	this->font = TTF_OpenFont("data/font/Arista.ttf",this->fontsize);
-
-	this->renderType = BLENDED;
-
-	update();
-}
-
-Gui::Gui(string _text, int _fontsize){
-
-	this->box.x = 10;
-	this->box.y = SDL_GetVideoSurface()->h/4 * 3;
-
-	SDL_Color _color = {0,0,0,0};
-	this->color = _color;
-	
-	this->fontsize = _fontsize;
-	this->font = TTF_OpenFont("data/font/Arista.ttf",this->fontsize);
-	if(this->font==NULL)
-		cout << TTF_GetError() << endl;
-	this->text = _text;
-
-	this->renderType = BLENDED;
-
-	update();
-}
-
 Gui::Gui(string _text, int _fontsize, int x, int y){
-
 	this->box.x = x;
 	this->box.y = y;
 
@@ -117,6 +80,10 @@ void Gui::setShadedColor(Color _color){
 void Gui::setFontSize(int size){
 	this->fontsize = size;
 	this->font = TTF_OpenFont("data/Arista.ttf",this->fontsize);
+}
+
+void Gui::setFont(string _fontpath){
+	this->font = TTF_OpenFont(_fontpath.c_str(),this->fontsize);
 }
 
 void Gui::setRenderType(int _renderType){
