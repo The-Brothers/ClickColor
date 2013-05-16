@@ -26,6 +26,19 @@ Board::Board(int boardSize){
 	}
 }
 
+Board::Board(int _boardNumber, int _boardSize, int _score, string _levelLayout){
+	this->box.x = 30;
+	this->box.y = 32;
+	this->box.w = BOARD_WIDTH;
+	this->box.h = BOARD_HEIGHT;
+
+	this->boardNumber = _boardNumber;
+	this->boardSize = _boardSize;
+	this->score = _score;
+
+	buildBoard(_levelLayout);
+}
+
 //Destructor
 Board::~Board(){
 
@@ -117,4 +130,24 @@ bool Board::isVictory(){
 	}
 	//if all the colors are the same
 	return true;
+}
+
+void Board::buildBoard(string _levelLayout){
+
+	//Leitura de CSV
+	int l=0;
+	for(int i=0;i<boardSize;i++){ //The line
+		for(int j=0;j<boardSize;j++){ //The Column
+			//configure the board to paint it based on the position on the board
+			if(_levelLayout[l]=='1'){
+				squares.push_back(new Square(1,(j*BOARD_WIDTH/boardSize)+this->box.x,(i*BOARD_HEIGHT/boardSize)+this->box.y,BOARD_WIDTH/boardSize,BOARD_HEIGHT/boardSize,i,j));
+            }
+			else{
+				squares.push_back(new Square(0,(j*BOARD_WIDTH/boardSize)+this->box.x,(i*BOARD_HEIGHT/boardSize)+this->box.y,BOARD_WIDTH/boardSize,BOARD_HEIGHT/boardSize,i,j));
+            }
+
+            l++;
+		}
+	}
+
 }

@@ -7,6 +7,7 @@
 #include "util.h"
 #include "board.h"
 #include "gui.h"
+#include "boardbuilder.h"
 
 #define SCREEN_W 470
 #define SCREEN_H 360
@@ -37,6 +38,7 @@ class Game{
 	//Variable to count the number of clicks you made
 	int clickCount;
 	int levelCounter;
+	BoardBuilder* boardbuilder;
 
 public:
 	Game(); //Constructor

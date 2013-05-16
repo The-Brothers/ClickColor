@@ -16,6 +16,8 @@ Game::Game(){
 	//Set the game running
 	this->running = true;
 	//create a new board nxn
+
+	this->boardbuilder= new BoardBuilder();
 	this->board = new Board(3);
 
 	//Variable to count the number of clicks you made
@@ -31,6 +33,8 @@ Game::Game(){
 
 //Destructor
 Game::~Game(){
+	//Free the interface surface
+	SDL_FreeSurface(this->interface);
 	//Free the screen surface
 	SDL_FreeSurface(this->screen);
 	//Close the TTF elements
