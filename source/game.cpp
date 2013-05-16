@@ -15,20 +15,25 @@ Game::Game(){
 
 	//Set the game running
 	this->running = true;
-	//create a new board nxn
 
-	this->boardbuilder= new BoardBuilder();
-	this->board = this->boardbuilder->getBoard(0);
 
 	//Variable to count the number of clicks you made
 	this->clickCount = 0;
-
+	this->levelCounter = 0;
+	this->maxLevel = 2;
 	//create a gui to write the clicks you made
 	this->clicks = new Gui(string("0"),32,380,170);
 	this->clicks->setColor(BLACK);
 
 	//load the game interface
 	this->interface = loadImage("./data/image/ui.png");
+
+	this->victoryMessage = new Gui(string("You won!"),32,340,290);
+	victoryMessage->setColor(RED);
+	
+	this->boardbuilder= new BoardBuilder();
+	//load the first board
+	this->board = this->boardbuilder->getBoard(this->levelCounter);
 }
 
 //Destructor
@@ -46,8 +51,6 @@ Game::~Game(){
 //
 void Game::run(){
 
-	Gui* victoryMessage = new Gui(string("You won!"),32,340,290);
-	victoryMessage->setColor(RED);
 	while(this->running){
 		this->start = SDL_GetTicks();
 		handleEvents();
@@ -63,19 +66,7 @@ void Game::run(){
 
 		//Check if all the squares have the same color
 		if(this->board->isVictory()){
-			victoryMessage->draw();
-			// victoryMessage->update();
-			SDL_Flip(screen);
-			// SDL_Delay(2000);
-
-			//Resets the click count
-			this->clickCount = 0;
-			char temp[5];
-			sprintf(temp,"%d",this->clickCount);
-			this->clicks->setText(string(temp));
-
-			//Resets the board
-			this->board = this->boardbuilder->getBoard(1);
+			nextLevel();	
 		}
 
 		//Draw the screen surface on the screen
@@ -127,4 +118,24 @@ void Game::handleEvents(){
 			break;
 		}
 	}
+}
+
+void Game::nextLevel(){
+	this->levelCounter++;
+	if(this->levelCounter == this->maxLevel)
+		this->levelCounter = 0;
+
+	victoryMessage->draw();
+	// victoryMessage->update();
+	SDL_Flip(screen);
+	// SDL_Delay(2000);
+
+	//Resets the click count
+	this->clickCount = 0;
+	char temp[5];
+	sprintf(temp,"%d",this->clickCount);
+	this->clicks->setText(string(temp));
+
+	//Resets the board
+	this->board = this->boardbuilder->getBoard(this->levelCounter);
 }

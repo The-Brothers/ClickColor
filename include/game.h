@@ -34,11 +34,12 @@ class Game{
 	SDL_Surface* interface;
 	Board* board;
 	Gui* clicks;
+	Gui* victoryMessage;
 
 	//Variable to count the number of clicks you made
 	int clickCount;
 	int levelCounter;
-
+	int maxLevel;
 	//The responsible to store all the levels
 	BoardBuilder* boardbuilder;
 
@@ -47,6 +48,8 @@ public:
 	~Game(); //Destructor
 	void run(); //THE GAME
 	void handleEvents();
+
+	void nextLevel();
 };
 
 #endif

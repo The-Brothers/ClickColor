@@ -51,14 +51,19 @@ void Gui::setColor(Color _color){
 	switch(_color){
 		case RED:
 			this->color = {0xff,0x00,0x00,0x00};
+		break;
 		case GREEN:
 			this->color = {0x00,0xff,0x00,0x00};
+		break;
 		case BLUE:
 			this->color = {0x00,0x00,0xff,0x00};
+		break;
 		case WHITE:
 			this->color = {0xff,0xff,0xff,0x00};
+		break;
 		case BLACK:
 			this->color = {0x00,0x00,0x00,0x00};
+		break;
 	}
 }
 
