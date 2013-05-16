@@ -38,6 +38,8 @@ class Game{
 	//Variable to count the number of clicks you made
 	int clickCount;
 	int levelCounter;
+
+	//The responsible to store all the levels
 	BoardBuilder* boardbuilder;
 
 public:

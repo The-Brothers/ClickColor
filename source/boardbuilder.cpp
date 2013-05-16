@@ -26,38 +26,26 @@ BoardBuilder::BoardBuilder(){
 	//Reads it
  	int i=0;
 	while(levelmap.getline(buffin,4096)){
-	
-
 		if(buffin[0] == '-'){
 			levelmap.getline(buffin,4096);
 			_boardNumber = atoi(buffin);
 
 			levelmap.getline(buffin,4096);
+			_score = atoi(buffin);
+			
+			levelmap.getline(buffin,4096);
 			_boardSize = atoi(buffin);
 
 			levelmap.getline(buffin,4096);
-			_score = atoi(buffin);
-
-			levelmap.getline(buffin,4096);
 			_levelLayout = string(buffin);
-
-			
-			std::cout<<_boardNumber<<std::endl;
-			std::cout<<_boardSize<<std::endl;
-			std::cout<<_score<<std::endl;
-			std::cout<<_levelLayout<<std::endl;
 			
 			boards.push_back(new Board(_boardNumber,  _boardSize,  _score, _levelLayout));
+			cout << "Loaded map: " << i << endl;
 			i++;
 		}
 			
 	}
-	//FOR
-		//Gets the information on it
-		//Build a Board object
-		//Store it in the boards vector
-		//Increment the numberOfLevels
-	//END FOR
+	cout << "All maps loaded!" << endl;
 }
 
 BoardBuilder::~BoardBuilder(){
@@ -67,7 +55,7 @@ BoardBuilder::~BoardBuilder(){
 //Return the board at _level position on the boards vector
 Board* BoardBuilder::getBoard(int _level){
 	//level must be between 0 and the max number of levels	
-	if(_level > 0 && _level < this->numberOfLevels)
+	if(_level >= 0 && _level < this->numberOfLevels)
 		return this->boards.at(_level);
 	
 	else return NULL;

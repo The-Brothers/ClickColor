@@ -18,7 +18,7 @@ Game::Game(){
 	//create a new board nxn
 
 	this->boardbuilder= new BoardBuilder();
-	this->board = new Board(3);
+	this->board = this->boardbuilder->getBoard(0);
 
 	//Variable to count the number of clicks you made
 	this->clickCount = 0;
@@ -66,7 +66,7 @@ void Game::run(){
 			victoryMessage->draw();
 			// victoryMessage->update();
 			SDL_Flip(screen);
-			SDL_Delay(2000);
+			// SDL_Delay(2000);
 
 			//Resets the click count
 			this->clickCount = 0;
@@ -75,7 +75,7 @@ void Game::run(){
 			this->clicks->setText(string(temp));
 
 			//Resets the board
-			this->board = new Board(3);
+			this->board = this->boardbuilder->getBoard(1);
 		}
 
 		//Draw the screen surface on the screen
@@ -87,44 +87,44 @@ void Game::run(){
 }
 
 void Game::handleEvents(){
-//Events
-while(SDL_PollEvent(&this->events)){
-	switch(this->events.type){
-		//If you click on the 'x'
-		case SDL_QUIT:
-			this->running = false;
-		break;
-			
-			//on key press ESC Exit game
-			case SDL_KEYDOWN:
-            switch (events.key.keysym.sym) {
-            	case SDLK_ESCAPE:
-                	this->running = false;
-                break;
-            	default:
-                break;
-          	}
+	//Events
+	while(SDL_PollEvent(&this->events)){
+		switch(this->events.type){
+			//If you click on the 'x'
+			case SDL_QUIT:
+				this->running = false;
+			break;
+				
+				//on key press ESC Exit game
+				case SDL_KEYDOWN:
+	            switch (events.key.keysym.sym) {
+	            	case SDLK_ESCAPE:
+	                	this->running = false;
+	                break;
+	            	default:
+	                break;
+	          	}
 
-		//if you click with the mouse
-		case SDL_MOUSEBUTTONDOWN:
-			//if you click the left button of the mouse
-			if(events.button.button == SDL_BUTTON_LEFT){
-				int x = events.button.x; //the position 'x' on the screen
-				int y = events.button.y; //the position 'y' on the screen
+			//if you click with the mouse
+			case SDL_MOUSEBUTTONDOWN:
+				//if you click the left button of the mouse
+				if(events.button.button == SDL_BUTTON_LEFT){
+					int x = events.button.x; //the position 'x' on the screen
+					int y = events.button.y; //the position 'y' on the screen
 
-				//Have you clicked on the board
-				if(this->board->isClicked(x,y)){
-					//click on the square on the board with this positions
-					this->board->click(x,y);
+					//Have you clicked on the board
+					if(this->board->isClicked(x,y)){
+						//click on the square on the board with this positions
+						this->board->click(x,y);
 
-					//Count the number of clicks you made
-					this->clickCount++;
-					char temp[5];
-					sprintf(temp,"%d",this->clickCount);
-					this->clicks->setText(string(temp));
+						//Count the number of clicks you made
+						this->clickCount++;
+						char temp[5];
+						sprintf(temp,"%d",this->clickCount);
+						this->clicks->setText(string(temp));
+					}
 				}
-			}
-		break;
+			break;
+		}
 	}
-}
 }
