@@ -128,7 +128,7 @@ void Game::nextLevel(){
 	victoryMessage->draw();
 	// victoryMessage->update();
 	SDL_Flip(screen);
-	// SDL_Delay(2000);
+	SDL_Delay(2000);
 
 	//Resets the click count
 	this->clickCount = 0;

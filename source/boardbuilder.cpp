@@ -23,8 +23,7 @@ BoardBuilder::BoardBuilder(){
 	int _boardSize;
 	int _score;
 	string _levelLayout;
-	//Reads it
- 	int i=0;
+	numberOfLevels=0;
 	while(levelmap.getline(buffin,4096)){
 		if(buffin[0] == '-'){
 			levelmap.getline(buffin,4096);
@@ -40,11 +39,11 @@ BoardBuilder::BoardBuilder(){
 			_levelLayout = string(buffin);
 			
 			boards.push_back(new Board(_boardNumber,  _boardSize,  _score, _levelLayout));
-			cout << "Loaded map: " << i << endl;
-			i++;
-		}
-			
+			cout << "Loaded map: " << numberOfLevels << endl;
+			numberOfLevels++;
+		}	
 	}
+	numberOfLevels++;
 	cout << "All maps loaded!" << endl;
 }
 
