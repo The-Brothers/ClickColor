@@ -20,7 +20,7 @@ Game::Game(){
 	//Variable to count the number of clicks you made
 	this->clickCount = 0;
 	this->levelCounter = 0;
-	this->maxLevel = 2;
+
 	//create a gui to write the clicks you made
 	this->clicks = new Gui(string("0"),32,380,170);
 	this->clicks->setColor(BLACK);
@@ -34,6 +34,7 @@ Game::Game(){
 	this->boardbuilder= new BoardBuilder();
 	//load the first board
 	this->board = this->boardbuilder->getBoard(this->levelCounter);
+	this->maxLevel =this->boardbuilder->numberOfLevels;
 }
 
 //Destructor

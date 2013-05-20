@@ -9,10 +9,10 @@
 #include <stdlib.h>
 class BoardBuilder{
 
-	int numberOfLevels;
 	vector<Board *> boards;
 
 public:
+	int numberOfLevels;
 	BoardBuilder();
 	~BoardBuilder();
 
