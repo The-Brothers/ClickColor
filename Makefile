@@ -63,7 +63,7 @@ clean:
 	@rm -rf $(BUILD)
 	@rm -f $(TARGET)
 
-run:
+run:$(TARGET)
 	@echo Running $(TARGET)
 	@./$(TARGET)
 
