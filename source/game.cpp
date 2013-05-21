@@ -121,10 +121,7 @@ void Game::handleEvents(){
 	}
 }
 
-void Game::nextLevel(){
-	
-	
-		
+void Game::nextLevel(){	
 	victoryMessage->draw();
 	victoryMessage->update();
 	SDL_Flip(screen);

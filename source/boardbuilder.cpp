@@ -39,12 +39,10 @@ BoardBuilder::BoardBuilder(){
 			_levelLayout = string(buffin);
 			
 			boards.push_back(new Board(_boardNumber,  _boardSize,  _score, _levelLayout));
-			cout << "Loaded map: " << numberOfLevels << endl;
 			numberOfLevels++;
 		}	
 	}
 	numberOfLevels++;
-	cout << "All maps loaded!" << endl;
 }
 
 BoardBuilder::~BoardBuilder(){

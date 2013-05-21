@@ -78,9 +78,9 @@ void Board::click(int x, int y){
 		SDL_Rect temp = squares[i]->getBox(); //get the current square dimensions
 		//check if you clicked inside it
 		if(	x >= temp.x && x <= temp.x + temp.w && y >= temp.y && y <= temp.y + temp.h){
-			//chenge the color of the square that you clicked
+			//change the color of the square that was clicked
 			squares[i]->changeColor();
-			//change the color of it neighbors
+			//change the neighbors colors
 			changeNeighbors(i);
 		}
 	}
@@ -135,18 +135,17 @@ bool Board::isVictory(){
 void Board::buildBoard(string _levelLayout){
 
 	//Leitura de CSV
-	int l=0;
+	int levelcounter=0;
 	for(int i=0;i<boardSize;i++){ //The line
 		for(int j=0;j<boardSize;j++){ //The Column
 			//configure the board to paint it based on the position on the board
-			if(_levelLayout[l]=='1'){
+			if(_levelLayout[levelcounter]=='1'){
 				squares.push_back(new Square(1,(j*BOARD_WIDTH/boardSize)+this->box.x,(i*BOARD_HEIGHT/boardSize)+this->box.y,BOARD_WIDTH/boardSize,BOARD_HEIGHT/boardSize,i,j));
             }
 			else{
 				squares.push_back(new Square(0,(j*BOARD_WIDTH/boardSize)+this->box.x,(i*BOARD_HEIGHT/boardSize)+this->box.y,BOARD_WIDTH/boardSize,BOARD_HEIGHT/boardSize,i,j));
             }
-
-            l++;
+            levelcounter++;
 		}
 	}
 
