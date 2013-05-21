@@ -34,7 +34,7 @@ Game::Game(){
 	this->boardbuilder= new BoardBuilder();
 	//load the first board
 	this->board = this->boardbuilder->getBoard(this->levelCounter);
-	this->maxLevel =this->boardbuilder->numberOfLevels;
+	this->maxLevel =this->boardbuilder->numberOfLevels-1;
 }
 
 //Destructor
@@ -122,21 +122,23 @@ void Game::handleEvents(){
 }
 
 void Game::nextLevel(){
-	this->levelCounter++;
-	if(this->levelCounter == this->maxLevel)
-		this->levelCounter = 0;
-
+	
+	
+		
 	victoryMessage->draw();
-	// victoryMessage->update();
+	victoryMessage->update();
 	SDL_Flip(screen);
 	SDL_Delay(2000);
 
-	//Resets the click count
-	this->clickCount = 0;
-	char temp[5];
-	sprintf(temp,"%d",this->clickCount);
-	this->clicks->setText(string(temp));
+	if(this->levelCounter < this->maxLevel){		
+		//Resets the click count
+		this->clickCount = 0;
+		char temp[5];
+		sprintf(temp,"%d",this->clickCount);
+		this->clicks->setText(string(temp));
 
-	//Resets the board
-	this->board = this->boardbuilder->getBoard(this->levelCounter);
+		//Resets the board
+		this->board = this->boardbuilder->getBoard(this->levelCounter);
+		this->levelCounter++;
+	}else this->running=false;
 }
