@@ -10,30 +10,36 @@ Game::Game(){
 	TTF_Init();
 	//Set the main screen, the screen where the magic happens!
 	this->screen = SDL_SetVideoMode(SCREEN_W,SCREEN_H,SCREEN_BPP,SDL_SWSURFACE);
-	//set the window title
+	//Set the window title
 	SDL_WM_SetCaption("ClickColor",NULL);
 
 	//Set the game running
 	this->running = true;
 
-
 	//Variable to count the number of clicks you made
 	this->clickCount = 0;
 	this->levelCounter = 0;
 
-	//create a gui to write the clicks you made
+	//Load the game interface
+	this->interface = loadImage("./data/image/ui.png");
+
+	//Initialize the text field where the clicks you make are written
 	this->clicks = new Gui(string("0"),32,380,170);
 	this->clicks->setColor(BLACK);
 
-	//load the game interface
-	this->interface = loadImage("./data/image/ui.png");
+	//Initialize the current level 
+	this->currentLevel = new Gui(string("1"),32,380,200);
+	this->currentLevel->setColor(BLACK);
 
+	//Initialize victory message 
 	this->victoryMessage = new Gui(string("You won!"),32,340,290);
 	victoryMessage->setColor(RED);
 	
+	//Build all the game boards that will be used by the game
 	this->boardbuilder= new BoardBuilder();
-	//load the first board
+	//Load the first board
 	this->board = this->boardbuilder->getBoard(this->levelCounter);
+	//Sets the last level number
 	this->maxLevel =this->boardbuilder->numberOfLevels-1;
 }
 
@@ -60,10 +66,10 @@ void Game::run(){
 		this->clicks->update();
 
 		//Render -> draw on the screen surface
-		// SDL_FillRect(SDL_GetVideoSurface(),NULL,SDL_MapRGB(SDL_GetVideoSurface()->format,0x00,0x00,0x00));
 		SDL_BlitSurface(this->interface,NULL,SDL_GetVideoSurface(),NULL);
 		this->board->draw();
 		this->clicks->draw();
+		this->currentLevel->draw();
 
 		//Check if all the squares have the same color
 		if(this->board->isVictory()){
@@ -87,7 +93,7 @@ void Game::handleEvents(){
 				this->running = false;
 			break;
 				
-				//on key press ESC Exit game
+				//On key press ESC Exit game
 				case SDL_KEYDOWN:
 	            switch (events.key.keysym.sym) {
 	            	case SDLK_ESCAPE:
@@ -97,20 +103,21 @@ void Game::handleEvents(){
 	                break;
 	          	}
 
-			//if you click with the mouse
+			//If you click with the mouse
 			case SDL_MOUSEBUTTONDOWN:
-				//if you click the left button of the mouse
+				//If you click the left button of the mouse
 				if(events.button.button == SDL_BUTTON_LEFT){
 					int x = events.button.x; //the position 'x' on the screen
 					int y = events.button.y; //the position 'y' on the screen
 
 					//Have you clicked on the board
 					if(this->board->isClicked(x,y)){
-						//click on the square on the board with this positions
+						//Performs a click on the square on the board with this positions
 						this->board->click(x,y);
 
 						//Count the number of clicks you made
 						this->clickCount++;
+						//Update the click count on the screen
 						char temp[5];
 						sprintf(temp,"%d",this->clickCount);
 						this->clicks->setText(string(temp));
@@ -141,5 +148,11 @@ void Game::nextLevel(){
 
 		//Increments the level counter
 		this->levelCounter++;
-	}else this->running=false;
+		
+		//Update the level counter on the screen
+		sprintf(temp,"%d",this->levelCounter);
+		this->currentLevel->setText(string(temp));
+		this->currentLevel->update();
+
+	}else this->running=false; //When you reach the last level the game ends.
 }

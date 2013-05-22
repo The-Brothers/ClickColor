@@ -34,6 +34,7 @@ class Game{
 	SDL_Surface* interface;
 	Board* board;
 	Gui* clicks;
+	Gui* currentLevel;
 	Gui* victoryMessage;
 
 	//Variable to count the number of clicks you made
