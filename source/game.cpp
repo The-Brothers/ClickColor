@@ -122,20 +122,24 @@ void Game::handleEvents(){
 }
 
 void Game::nextLevel(){	
-	victoryMessage->draw();
 	victoryMessage->update();
+	victoryMessage->draw();
 	SDL_Flip(screen);
-	SDL_Delay(2000);
+	SDL_Delay(1000);
 
-	if(this->levelCounter < this->maxLevel){		
+	if(this->levelCounter < this->maxLevel){
 		//Resets the click count
 		this->clickCount = 0;
-		char temp[5];
+
+		//Resets the clicks display
+		char temp[5]; 
 		sprintf(temp,"%d",this->clickCount);
 		this->clicks->setText(string(temp));
 
 		//Resets the board
 		this->board = this->boardbuilder->getBoard(this->levelCounter);
+
+		//Increments the level counter
 		this->levelCounter++;
 	}else this->running=false;
 }
