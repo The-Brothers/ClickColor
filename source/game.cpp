@@ -28,7 +28,7 @@ Game::Game(){
 	this->clicks->setColor(BLACK);
 
 	//Initialize the current level 
-	this->currentLevel = new Gui(string("1"),32,380,200);
+	this->currentLevel = new Gui(string("1"),32,380,50);
 	this->currentLevel->setColor(BLACK);
 
 	//Initialize victory message 
@@ -145,14 +145,14 @@ void Game::nextLevel(){
 
 		//Resets the board
 		this->board = this->boardbuilder->getBoard(this->levelCounter);
-
+		
 		//Increments the level counter
 		this->levelCounter++;
-		
+
 		//Update the level counter on the screen
 		sprintf(temp,"%d",this->levelCounter);
 		this->currentLevel->setText(string(temp));
 		this->currentLevel->update();
-
+		
 	}else this->running=false; //When you reach the last level the game ends.
 }
