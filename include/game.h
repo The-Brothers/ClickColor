@@ -33,8 +33,11 @@ class Game{
 	//The game board
 	SDL_Surface* interface;
 	Board* board;
+
+	//The text that is written on the screen
 	Gui* clicks;
 	Gui* currentLevel;
+	Gui* minimumClicks;
 	Gui* victoryMessage;
 
 	//Variable to count the number of clicks you made

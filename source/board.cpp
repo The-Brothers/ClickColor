@@ -150,3 +150,7 @@ void Board::buildBoard(string _levelLayout){
 	}
 
 }
+
+int Board::getScore(){
+	return this->score;
+}

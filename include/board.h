@@ -44,6 +44,8 @@ public:
 	void changeNeighbors(int i);	//change the color of the cell number i neighbors
 
 	bool isVictory(); //go through the board to check if it is color uniform
+
+	int getScore();
 };
 
 #endif

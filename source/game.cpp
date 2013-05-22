@@ -8,8 +8,10 @@ Game::Game(){
 	//Initialize all the SDL shit
 	SDL_Init(SDL_INIT_EVERYTHING);
 	TTF_Init();
+	
 	//Set the main screen, the screen where the magic happens!
 	this->screen = SDL_SetVideoMode(SCREEN_W,SCREEN_H,SCREEN_BPP,SDL_SWSURFACE);
+	
 	//Set the window title
 	SDL_WM_SetCaption("ClickColor",NULL);
 
@@ -23,6 +25,13 @@ Game::Game(){
 	//Load the game interface
 	this->interface = loadImage("./data/image/ui.png");
 
+	//Build all the game boards that will be used by the game
+	this->boardbuilder= new BoardBuilder();
+	//Load the first board
+	this->board = this->boardbuilder->getBoard(this->levelCounter);
+	//Sets the last level number
+	this->maxLevel =this->boardbuilder->numberOfLevels-1;
+	
 	//Initialize the text field where the clicks you make are written
 	this->clicks = new Gui(string("0"),32,380,170);
 	this->clicks->setColor(BLACK);
@@ -31,16 +40,15 @@ Game::Game(){
 	this->currentLevel = new Gui(string("1"),32,380,50);
 	this->currentLevel->setColor(BLACK);
 
+	//Initialize the minimum number of clicks needed to pass the level
+	char temp[5];
+	sprintf(temp,"%d",this->board->getScore());
+	this->minimumClicks = new Gui(string(temp),32,380,110);
+	this->minimumClicks->setColor(BLACK);
+	
 	//Initialize victory message 
 	this->victoryMessage = new Gui(string("You won!"),32,340,290);
 	victoryMessage->setColor(RED);
-	
-	//Build all the game boards that will be used by the game
-	this->boardbuilder= new BoardBuilder();
-	//Load the first board
-	this->board = this->boardbuilder->getBoard(this->levelCounter);
-	//Sets the last level number
-	this->maxLevel =this->boardbuilder->numberOfLevels-1;
 }
 
 //Destructor
@@ -70,6 +78,7 @@ void Game::run(){
 		this->board->draw();
 		this->clicks->draw();
 		this->currentLevel->draw();
+		this->minimumClicks->draw();
 
 		//Check if all the squares have the same color
 		if(this->board->isVictory()){
@@ -132,6 +141,7 @@ void Game::nextLevel(){
 	victoryMessage->update();
 	victoryMessage->draw();
 	SDL_Flip(screen);
+	//TODO: Remove this delay for a window message.
 	SDL_Delay(1000);
 
 	if(this->levelCounter < this->maxLevel){
@@ -153,6 +163,11 @@ void Game::nextLevel(){
 		sprintf(temp,"%d",this->levelCounter);
 		this->currentLevel->setText(string(temp));
 		this->currentLevel->update();
-		
+
+		//Update the minimum clicks text
+		sprintf(temp,"%d",this->board->getScore());
+		this->minimumClicks->setText(string(temp));
+		this->minimumClicks->update();
+
 	}else this->running=false; //When you reach the last level the game ends.
 }
