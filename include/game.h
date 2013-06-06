@@ -6,8 +6,10 @@
 #include "timer.h"
 #include "util.h"
 #include "board.h"
+#include "button.h"
 #include "gui.h"
 #include "boardbuilder.h"
+#include  <sstream>
 
 #define SCREEN_W 470
 #define SCREEN_H 360
@@ -46,6 +48,9 @@ class Game{
 	int maxLevel;
 	//The responsible to store all the levels
 	BoardBuilder* boardbuilder;
+
+	//The reset button
+	Button *resetButton;
 
 public:
 	Game(); //Constructor

@@ -13,10 +13,11 @@
 1,1,1,0,0,0,1,1,1
 
 **/
-
+using namespace std;
 BoardBuilder::BoardBuilder(){
 	//Open the levels.map file
 	ifstream levelmap("data/maps/levels.map");
+	
 	char buffin[4096];
 
 	int _boardNumber;
@@ -24,18 +25,18 @@ BoardBuilder::BoardBuilder(){
 	int _score;
 	string _levelLayout;
 	numberOfLevels=0;
-	while(levelmap.getline(buffin,4096)){
+	while(levelmap.getline(buffin,2)){
 		if(buffin[0] == '-'){
-			levelmap.getline(buffin,4096);
+			levelmap.getline(buffin,2);
 			_boardNumber = atoi(buffin);
-
-			levelmap.getline(buffin,4096);
+    
+    		levelmap.getline(buffin,2);
 			_score = atoi(buffin);
 			
-			levelmap.getline(buffin,4096);
+			levelmap.getline(buffin,2);
 			_boardSize = atoi(buffin);
 
-			levelmap.getline(buffin,4096);
+			levelmap.getline(buffin,_boardSize*_boardSize+1);
 			_levelLayout = string(buffin);
 			
 			boards.push_back(new Board(_boardNumber,  _boardSize,  _score, _levelLayout));

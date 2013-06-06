@@ -49,6 +49,9 @@ Game::Game(){
 	//Initialize victory message 
 	this->victoryMessage = new Gui(string("You won!"),32,340,290);
 	victoryMessage->setColor(RED);
+
+	//Initialize the reset button
+	this->resetButton = new Button("data/image/config.png",340,285);
 }
 
 //Destructor
@@ -79,6 +82,7 @@ void Game::run(){
 		this->clicks->draw();
 		this->currentLevel->draw();
 		this->minimumClicks->draw();
+		this->resetButton->draw();
 
 		//Check if all the squares have the same color
 		if(this->board->isVictory()){
@@ -127,10 +131,14 @@ void Game::handleEvents(){
 						//Count the number of clicks you made
 						this->clickCount++;
 						//Update the click count on the screen
-						char temp[5];
-						sprintf(temp,"%d",this->clickCount);
-						this->clicks->setText(string(temp));
+						
+						stringstream temps;
+						temps<<this->clickCount;
+						this->clicks->setText(string(temps.str()));
 					}
+
+					this->resetButton->isClicked(x,y);
+
 				}
 			break;
 		}
