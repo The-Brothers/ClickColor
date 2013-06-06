@@ -130,8 +130,8 @@ void Game::handleEvents(){
 
 						//Count the number of clicks you made
 						this->clickCount++;
-						//Update the click count on the screen
 						
+						//Update the click count on the screen
 						stringstream temps;
 						temps<<this->clickCount;
 						this->clicks->setText(string(temps.str()));
