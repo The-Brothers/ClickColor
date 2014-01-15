@@ -1,0 +1,4 @@
+CHANGELOG
+
+Jan 15 2013
+* Restructured SDL and SDL_ttf header files
