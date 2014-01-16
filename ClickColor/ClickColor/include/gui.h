@@ -42,7 +42,7 @@ public:
 	Gui(string _text, int _fontsize, int x, int y);
 	~Gui();
 
-	void draw();
+	void draw(SDL_Surface *screen);
 	void update();
 
 	void setText(string _text);

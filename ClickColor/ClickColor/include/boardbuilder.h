@@ -13,9 +13,10 @@ class BoardBuilder{
 	vector<Board *> boards;
 
 public:
-	int numberOfLevels;
-	BoardBuilder();
+	BoardBuilder(SDL_Surface *screen);
 	~BoardBuilder();
+	
+	int numberOfLevels;
 
 	Board* getBoard(int _level);
 	void setScore(int _score);

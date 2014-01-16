@@ -5,28 +5,30 @@
 using namespace std;
 
 //Constructor
-Board::Board(int boardSize){
+Board::Board(int boardSize, SDL_Surface *screen){
 
 	//Set the position of the board on the screen and it's dimensions
-	this->box.x = 30;
-	this->box.y = 32;
-	this->box.w = BOARD_WIDTH;
-	this->box.h = BOARD_HEIGHT;
-
-	for(int i=0;i<boardSize;i++){ //The line
-		for(int j=0;j<boardSize;j++){ //The Column
+	box.x = 30;
+	box.y = 32;
+	box.w = BOARD_WIDTH;
+	box.h = BOARD_HEIGHT;
+	
+	//The line
+	for(int i=0;i<boardSize;i++){
+		//The Column
+		for(int j=0;j<boardSize;j++){
 			//configure the board to paint it based on the position on the board
-			if((j+i)%2==0){
-				squares.push_back(new Square(1,(j*BOARD_WIDTH/boardSize)+this->box.x,(i*BOARD_HEIGHT/boardSize)+this->box.y,BOARD_WIDTH/boardSize,BOARD_HEIGHT/boardSize,i,j));
+			if((j+i) % 2 == 0){
+				squares.push_back(new Square(1,(j*BOARD_WIDTH/boardSize) + box.x,(i*BOARD_HEIGHT/boardSize) + box.y,BOARD_WIDTH/boardSize,BOARD_HEIGHT/boardSize,i,j, screen));
             }
 			else{
-				squares.push_back(new Square(0,(j*BOARD_WIDTH/boardSize)+this->box.x,(i*BOARD_HEIGHT/boardSize)+this->box.y,BOARD_WIDTH/boardSize,BOARD_HEIGHT/boardSize,i,j));
+				squares.push_back(new Square(0,(j*BOARD_WIDTH/boardSize) + box.x,(i*BOARD_HEIGHT/boardSize) + box.y,BOARD_WIDTH/boardSize,BOARD_HEIGHT/boardSize,i,j, screen));
             }
 		}
 	}
 }
 
-Board::Board(int _boardNumber, int _boardSize, int _score, string _levelLayout){
+Board::Board(int _boardNumber, int _boardSize, int _score, string _levelLayout, SDL_Surface *screen){
 	this->box.x = 30;
 	this->box.y = 32;
 	this->box.w = BOARD_WIDTH;
@@ -36,20 +38,20 @@ Board::Board(int _boardNumber, int _boardSize, int _score, string _levelLayout){
 	this->boardSize = _boardSize;
 	this->score = _score;
 
-	buildBoard(_levelLayout);
+	buildBoard(_levelLayout, screen);
 }
 
 //Destructor
 Board::~Board(){
-
+	squares.erase(squares.begin(), squares.end());
 }
 
 //Draw the board on the game screen
-void Board::draw(){
+void Board::draw(SDL_Surface *screen){
 	//go throught the square vector and draw each one.
 	for(int i=0;i<(int)squares.size();i++){
 		SDL_Rect temp = squares[i]->getBox(); //get the position and dimension of each square
-		SDL_FillRect(SDL_GetVideoSurface(), &temp ,squares[i]->getCor()); //draw the square
+		SDL_FillRect(screen, &temp ,(Uint32)squares[i]->getCor()); //draw the square
 	}
 }
 
@@ -121,7 +123,7 @@ void Board::changeNeighbors(int i){
 //go through the board to check if it is color uniform
 bool Board::isVictory(){
 	//get the color from the first square
-	Uint32 tempColor = this->squares.at(0)->getCor();
+	Uint64 tempColor = squares.at(0)->getCor();
 	
 	for(int i=0;i<(int)this->squares.size();i++){
 		//if the square color is different from the color from the first square
@@ -132,7 +134,7 @@ bool Board::isVictory(){
 	return true;
 }
 
-void Board::buildBoard(string _levelLayout){
+void Board::buildBoard(string _levelLayout, SDL_Surface *screen){
 
 	//Leitura de CSV
 	int levelcounter=0;
@@ -140,10 +142,10 @@ void Board::buildBoard(string _levelLayout){
 		for(int j=0;j<boardSize;j++){ //The Column
 			//configure the board to paint it based on the position on the board
 			if(_levelLayout[levelcounter]=='1'){
-				squares.push_back(new Square(1,(j*BOARD_WIDTH/boardSize)+this->box.x,(i*BOARD_HEIGHT/boardSize)+this->box.y,BOARD_WIDTH/boardSize,BOARD_HEIGHT/boardSize,i,j));
+				squares.push_back(new Square(1,(j*BOARD_WIDTH/boardSize)+this->box.x,(i*BOARD_HEIGHT/boardSize)+this->box.y,BOARD_WIDTH/boardSize,BOARD_HEIGHT/boardSize,i,j, screen));
             }
 			else{
-				squares.push_back(new Square(0,(j*BOARD_WIDTH/boardSize)+this->box.x,(i*BOARD_HEIGHT/boardSize)+this->box.y,BOARD_WIDTH/boardSize,BOARD_HEIGHT/boardSize,i,j));
+				squares.push_back(new Square(0,(j*BOARD_WIDTH/boardSize)+this->box.x,(i*BOARD_HEIGHT/boardSize)+this->box.y,BOARD_WIDTH/boardSize,BOARD_HEIGHT/boardSize,i,j, screen));
             }
             levelcounter++;
 		}

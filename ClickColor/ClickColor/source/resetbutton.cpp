@@ -1,9 +1,10 @@
 #include "button.h"
+#include "util.h"
 
 using namespace std;
 
 Button::Button(const char* img, int _x, int _y){
-	this->image = loadImage(img);
+	this->image = util->loadImage(img);
 	this->box.x = _x;
 	this->box.y = _y;
 
@@ -15,8 +16,8 @@ Button::~Button(){
 	SDL_FreeSurface(this->image);
 }
 
-void Button::draw(){
-	SDL_BlitSurface(this->image,NULL,SDL_GetVideoSurface(),&this->box);
+void Button::draw(SDL_Surface *screen){
+	SDL_BlitSurface(this->image,NULL,screen,&this->box);
 }
 
 void Button::action(){

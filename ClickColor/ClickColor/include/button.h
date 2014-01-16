@@ -11,12 +11,14 @@ class Button{
 	SDL_Rect box;
 
 	SDL_Surface * image;
+	
+	util *util;
 
 public:
 	Button(const char* img, int _x, int _y);
 	~Button();
 
-	void draw();
+	void draw(SDL_Surface *screen);
 	void update();
 	void action();
 

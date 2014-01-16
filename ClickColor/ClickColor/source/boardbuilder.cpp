@@ -14,7 +14,7 @@
 
 **/
 using namespace std;
-BoardBuilder::BoardBuilder(){
+BoardBuilder::BoardBuilder(SDL_Surface *screen){
 	//Open the levels.map file
 	ifstream levelmap("data/maps/levels.map");
 	
@@ -25,6 +25,7 @@ BoardBuilder::BoardBuilder(){
 	int _score;
 	string _levelLayout;
 	numberOfLevels=0;
+	
 	while(levelmap.getline(buffin,2)){
 		if(buffin[0] == '-'){
 			levelmap.getline(buffin,2);
@@ -39,24 +40,26 @@ BoardBuilder::BoardBuilder(){
 			levelmap.getline(buffin,_boardSize*_boardSize+1);
 			_levelLayout = string(buffin);
 			
-			boards.push_back(new Board(_boardNumber,  _boardSize,  _score, _levelLayout));
+			//push board vector for new board
+			boards.push_back(new Board(_boardNumber,  _boardSize,  _score, _levelLayout, screen));
+			//increment the level number
 			numberOfLevels++;
 		}	
 	}
+	
 	numberOfLevels++;
 }
 
 BoardBuilder::~BoardBuilder(){
-
 }
 
-//Return the board at _level position on the boards vector
 Board* BoardBuilder::getBoard(int _level){
 	//level must be between 0 and the max number of levels	
-	if(_level >= 0 && _level < this->numberOfLevels)
-		return this->boards.at(_level);
+	if(_level >= 0 && _level < this->numberOfLevels) {
+		return boards.at(_level); //Return the board at _level position on the boards vector
+	}
 	
-	else return NULL;
+	return NULL;
 }
 
 //Set the minimum number of clicks of a level and write it on the levels file

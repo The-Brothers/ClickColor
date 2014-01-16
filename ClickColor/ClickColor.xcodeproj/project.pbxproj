@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AAF4534A18878C470062F708 /* SDL2_image.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AAF4534918878C470062F708 /* SDL2_image.framework */; };
 		AAF46B49188657D800C0BA13 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AAF46B48188657D800C0BA13 /* main.cpp */; };
 		AAF46B4B188657D800C0BA13 /* ClickColor.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = AAF46B4A188657D800C0BA13 /* ClickColor.1 */; };
 		AAF46B531886589A00C0BA13 /* SDL2_ttf.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AAF46B511886589A00C0BA13 /* SDL2_ttf.framework */; };
@@ -51,6 +52,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		AAF4534918878C470062F708 /* SDL2_image.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2_image.framework; path = ../../../../../Softwares/SDL2_image.framework; sourceTree = "<group>"; };
 		AAF46B45188657D800C0BA13 /* ClickColor */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = ClickColor; sourceTree = BUILT_PRODUCTS_DIR; };
 		AAF46B48188657D800C0BA13 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		AAF46B4A188657D800C0BA13 /* ClickColor.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = ClickColor.1; sourceTree = "<group>"; };
@@ -79,6 +81,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AAF4534A18878C470062F708 /* SDL2_image.framework in Frameworks */,
 				AAF46B531886589A00C0BA13 /* SDL2_ttf.framework in Frameworks */,
 				AAF46B541886589A00C0BA13 /* SDL2.framework in Frameworks */,
 			);
@@ -106,6 +109,7 @@
 				AAF46B5A188658CB00C0BA13 /* square.h */,
 				AAF46B5B188658CB00C0BA13 /* timer.h */,
 				AAF46B5C188658CB00C0BA13 /* util.h */,
+				AAF4534918878C470062F708 /* SDL2_image.framework */,
 				AAF46B511886589A00C0BA13 /* SDL2_ttf.framework */,
 				AAF46B521886589A00C0BA13 /* SDL2.framework */,
 				AAF46B47188657D800C0BA13 /* ClickColor */,
@@ -272,11 +276,14 @@
 					"$(inherited)",
 					/Users/muhdmirzamz/Documents/Softwares,
 				);
-				HEADER_SEARCH_PATHS = /Users/muhdmirzamz/Documents/Softwares/SDL2.framework/Versions/A/Headers;
+				HEADER_SEARCH_PATHS = (
+					/Users/muhdmirzamz/Documents/Softwares/SDL2.framework/Versions/A/Headers,
+					/Users/muhdmirzamz/Documents/Softwares/SDL2_image.framework/Versions/A/Headers,
+					/Users/muhdmirzamz/Documents/Softwares/SDL2_ttf.framework/Versions/A/Headers,
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SCAN_ALL_SOURCE_FILES_FOR_INCLUDES = YES;
-				USER_HEADER_SEARCH_PATHS = /Users/muhdmirzamz/Documents/Code/Projects/CPPProjects/ClickColor/ClickColor/ClickColor;
-				"USER_HEADER_SEARCH_PATHS[arch=*]" = /Users/muhdmirzamz/Documents/Softwares/SDL2_ttf.framework/Versions/A/Headers;
+				USER_HEADER_SEARCH_PATHS = /Users/muhdmirzamz/Documents/Softwares/SDL2.framework/Versions/A/Headers;
 			};
 			name = Debug;
 		};
@@ -288,11 +295,14 @@
 					"$(inherited)",
 					/Users/muhdmirzamz/Documents/Softwares,
 				);
-				HEADER_SEARCH_PATHS = /Users/muhdmirzamz/Documents/Softwares/SDL2.framework/Versions/A/Headers;
+				HEADER_SEARCH_PATHS = (
+					/Users/muhdmirzamz/Documents/Softwares/SDL2.framework/Versions/A/Headers,
+					/Users/muhdmirzamz/Documents/Softwares/SDL2_image.framework/Versions/A/Headers,
+					/Users/muhdmirzamz/Documents/Softwares/SDL2_ttf.framework/Versions/A/Headers,
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SCAN_ALL_SOURCE_FILES_FOR_INCLUDES = YES;
-				USER_HEADER_SEARCH_PATHS = /Users/muhdmirzamz/Documents/Code/Projects/CPPProjects/ClickColor/ClickColor/ClickColor;
-				"USER_HEADER_SEARCH_PATHS[arch=*]" = /Users/muhdmirzamz/Documents/Softwares/SDL2_ttf.framework/Versions/A/Headers;
+				USER_HEADER_SEARCH_PATHS = /Users/muhdmirzamz/Documents/Softwares/SDL2.framework/Versions/A/Headers;
 			};
 			name = Release;
 		};
@@ -315,6 +325,7 @@
 				AAF46B50188657D800C0BA13 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

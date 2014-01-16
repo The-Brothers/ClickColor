@@ -1,116 +1,150 @@
+#include "SDL.h"
+#include "SDL_error.h"
+#include "SDL_video.h"
+#include "SDL_surface.h"
+#include "SDL_events.h"
+
+#include "SDL_ttf.h"
+#include "SDL_image.h"
+
 #include "game.h"
 #include "board.h"
 #include "util.h"
-#include "SDL/SDL_ttf.h"
 
 //Contructor
 Game::Game(){
 	//Initialize all the SDL shit
-	SDL_Init(SDL_INIT_EVERYTHING);
+	if (!SDL_Init(SDL_INIT_EVERYTHING) < 0) {
+		cout << "Error initialising SDL! SDL error message: " << SDL_GetError() << endl;
+	}
+	//Initialise word TTF
 	TTF_Init();
 	
-	//Set the main screen, the screen where the magic happens!
-	this->screen = SDL_SetVideoMode(SCREEN_W,SCREEN_H,SCREEN_BPP,SDL_SWSURFACE);
+	//Initialise IMG extension
+	int flags = IMG_INIT_PNG;
+	int init = IMG_Init(flags);
+	if (init != flags) {
+		cout << "Error!" << endl;
+	}
 	
-	//Set the window title
-	SDL_WM_SetCaption("ClickColor",NULL);
-
+	//Set the main window
+	window = SDL_CreateWindow(
+	"ClickColor",
+	SDL_WINDOWPOS_CENTERED,
+	SDL_WINDOWPOS_CENTERED,
+	SCREEN_W,
+	SCREEN_H,
+	SDL_WINDOW_SHOWN
+	);
+	
 	//Set the game running
-	this->running = true;
+	running = true;
 
 	//Variable to count the number of clicks you made
-	this->clickCount = 0;
-	this->levelCounter = 0;
+	clickCount = 0;
+	levelCounter = 0;
 
 	//Load the game interface
-	this->interface = loadImage("./data/image/ui.png");
+	interface = util->loadImage("./data/image/ui.png");
 
 	//Build all the game boards that will be used by the game
-	this->boardbuilder= new BoardBuilder();
+	boardbuilder = new BoardBuilder(screen);
 	//Load the first board
-	this->board = this->boardbuilder->getBoard(this->levelCounter);
+	board = boardbuilder->getBoard(levelCounter);
 	//Sets the last level number
-	this->maxLevel =this->boardbuilder->numberOfLevels-1;
+	maxLevel = boardbuilder->numberOfLevels-1;
 	
 	//Initialize the text field where the clicks you make are written
-	this->clicks = new Gui(string("0"),32,380,170);
-	this->clicks->setColor(BLACK);
+	clicks = new Gui("0",32,380,170);
+	clicks->setColor(BLACK);
 
 	//Initialize the current level 
-	this->currentLevel = new Gui(string("1"),32,380,50);
-	this->currentLevel->setColor(BLACK);
+	currentLevel = new Gui("1",32,380,50);
+	currentLevel->setColor(BLACK);
 
 	//Initialize the minimum number of clicks needed to pass the level
 	char temp[5];
-	sprintf(temp,"%d",this->board->getScore());
-	this->minimumClicks = new Gui(string(temp),32,380,110);
-	this->minimumClicks->setColor(BLACK);
+	sprintf(temp,"%d", board->getScore());
+	minimumClicks = new Gui(temp,32,380,110);
+	minimumClicks->setColor(BLACK);
 	
 	//Initialize victory message 
-	this->victoryMessage = new Gui(string("You won!"),32,340,290);
+	victoryMessage = new Gui("You won!",32,340,290);
 	victoryMessage->setColor(RED);
 
 	//Initialize the reset button
-	this->resetButton = new Button("data/image/config.png",340,285);
+	resetButton = new Button("data/image/config.png",340,285);
 }
 
 //Destructor
 Game::~Game(){
-	//Free the interface surface
+	//Free the interface(game board) surface
 	SDL_FreeSurface(this->interface);
 	//Free the screen surface
 	SDL_FreeSurface(this->screen);
+	
+	delete clicks;
+	delete currentLevel;
+	delete minimumClicks;
+	delete victoryMessage;
+	
+	delete resetButton;
+	
+	//Free the game window
+	SDL_DestroyWindow(window);
 	//Close the TTF elements
 	TTF_Quit();
+	// Close the IMG elements
+	IMG_Quit();
 	//Quit the SDL elements
 	SDL_Quit();
 }
 
-//
+//main loop
 void Game::run(){
 
-	while(this->running){
-		this->start = SDL_GetTicks();
+	while(running){
+		start = SDL_GetTicks();
 		handleEvents();
 		//Logic
-		this->board->update();
-		this->clicks->update();
+		board->update();
+		clicks->update();
 
 		//Render -> draw on the screen surface
-		SDL_BlitSurface(this->interface,NULL,SDL_GetVideoSurface(),NULL);
-		this->board->draw();
-		this->clicks->draw();
-		this->currentLevel->draw();
-		this->minimumClicks->draw();
-		this->resetButton->draw();
+		SDL_BlitSurface(interface,NULL,screen,NULL);
+		board->draw(screen);
+		clicks->draw(screen);
+		currentLevel->draw(screen);
+		minimumClicks->draw(screen);
+		resetButton->draw(screen);
 
 		//Check if all the squares have the same color
-		if(this->board->isVictory()){
+		if(board->isVictory()){
 			nextLevel();	
 		}
 
 		//Draw the screen surface on the screen
-		SDL_Flip(screen);
+		SDL_UpdateWindowSurface(window);
 		//FPS control
-		if(1000/FPS > SDL_GetTicks() - this->start)
-			SDL_Delay(1000/FPS - (SDL_GetTicks() - this->start));
+		if(1000/FPS > SDL_GetTicks() - start)
+			SDL_Delay(1000/FPS - (SDL_GetTicks() - start));
 	}
 }
 
 void Game::handleEvents(){
 	//Events
-	while(SDL_PollEvent(&this->events)){
-		switch(this->events.type){
+	while(SDL_PollEvent(&events)){
+		switch(events.type){
 			//If you click on the 'x'
 			case SDL_QUIT:
-				this->running = false;
+				running = false;
 			break;
 				
-				//On key press ESC Exit game
-				case SDL_KEYDOWN:
+			//On key press ESC Exit game
+			case SDL_KEYDOWN:
 	            switch (events.key.keysym.sym) {
 	            	case SDLK_ESCAPE:
-	                	this->running = false;
+	                	running = false;
 	                break;
 	            	default:
 	                break;
@@ -124,22 +158,23 @@ void Game::handleEvents(){
 					int y = events.button.y; //the position 'y' on the screen
 
 					//Have you clicked on the board
-					if(this->board->isClicked(x,y)){
+					if(board->isClicked(x,y)){
 						//Performs a click on the square on the board with this positions
-						this->board->click(x,y);
+						board->click(x,y);
 
 						//Count the number of clicks you made
-						this->clickCount++;
+						clickCount++;
 						
 						//Update the click count on the screen
 						stringstream temps;
-						temps<<this->clickCount;
-						this->clicks->setText(string(temps.str()));
+						temps << clickCount;
+						clicks->setText(string(temps.str()));
 					}
 
-					this->resetButton->isClicked(x,y);
+					resetButton->isClicked(x,y);
 
 				}
+				
 			break;
 		}
 	}
@@ -147,35 +182,37 @@ void Game::handleEvents(){
 
 void Game::nextLevel(){	
 	victoryMessage->update();
-	victoryMessage->draw();
-	SDL_Flip(screen);
+	victoryMessage->draw(screen);
+	SDL_UpdateWindowSurface(window);
 	//TODO: Remove this delay for a window message.
-	SDL_Delay(1000);
+	//SDL_Delay(1000) removed, just commented out actually
 
-	if(this->levelCounter < this->maxLevel){
+	if(levelCounter < this->maxLevel){
 		//Resets the click count
-		this->clickCount = 0;
+		clickCount = 0;
 
 		//Resets the clicks display
 		char temp[5]; 
-		sprintf(temp,"%d",this->clickCount);
-		this->clicks->setText(string(temp));
+		sprintf(temp,"%d", clickCount);
+		clicks->setText(string(temp));
 
 		//Resets the board
-		this->board = this->boardbuilder->getBoard(this->levelCounter);
+		board = boardbuilder->getBoard(levelCounter);
 		
 		//Increments the level counter
-		this->levelCounter++;
+		levelCounter++;
 
 		//Update the level counter on the screen
 		sprintf(temp,"%d",this->levelCounter);
-		this->currentLevel->setText(string(temp));
-		this->currentLevel->update();
+		currentLevel->setText(string(temp));
+		currentLevel->update();
 
 		//Update the minimum clicks text
 		sprintf(temp,"%d",this->board->getScore());
-		this->minimumClicks->setText(string(temp));
-		this->minimumClicks->update();
+		minimumClicks->setText(string(temp));
+		minimumClicks->update();
 
-	}else this->running=false; //When you reach the last level the game ends.
+	} else {
+		running=false; //When you reach the last level the game ends.
+	}
 }

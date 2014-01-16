@@ -2,7 +2,7 @@
 #define GAME_H
 
 #include "SDL.h"
-#include "SDL/SDL_image.h"
+#include "SDL_image.h"
 #include "timer.h"
 #include "util.h"
 #include "board.h"
@@ -25,14 +25,18 @@ enum GameEstate{
 class Game{
 
 	//Configs
+	SDL_Window* window; // game window
 	SDL_Surface* screen; //the game screen
 	SDL_Event events; //the ingame events
 
 	bool running; //sets the game running
 
 	Uint32 start; //FPS control
+	
+	util* util;
 
 	//The game board
+	//Individual boards
 	SDL_Surface* interface;
 	Board* board;
 
@@ -46,7 +50,7 @@ class Game{
 	int clickCount;
 	int levelCounter;
 	int maxLevel;
-	//The responsible to store all the levels
+	//This is used to store and manage all the levels
 	BoardBuilder* boardbuilder;
 
 	//The reset button
@@ -55,6 +59,7 @@ class Game{
 public:
 	Game(); //Constructor
 	~Game(); //Destructor
+	
 	void run(); //THE GAME
 	void handleEvents();
 

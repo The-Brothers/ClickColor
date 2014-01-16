@@ -4,10 +4,10 @@
 using namespace std;
 
 //Constructor
-Square::Square(int cor, int _x, int _y, int _w, int _h, int _i, int _j){
+Square::Square(int cor, int _x, int _y, int _w, int _h, int _i, int _j, SDL_Surface *screen){
 	//TODO: Put this somewherelse
-	this->color1 = SDL_MapRGB(SDL_GetVideoSurface()->format,0xc9,0x53,0x87);
-	this->color2 = SDL_MapRGB(SDL_GetVideoSurface()->format,0xcd,0xdb,0x74);
+	//color1 = SDL_MapRGB(screen->format,0xc9,0x53,0x87);
+	//color2 = SDL_MapRGB(screen->format,0xcd,0xdb,0x74);
 
 	//Choose the color based on the parameter
 	if(cor==1)
@@ -31,12 +31,12 @@ Square::~Square(){
 }
 
 //get the square color
-Uint32 Square::getCor(){
-	return this->color;
+Uint64 Square::getCor(){
+	return color;
 }
 //set a new color for the square
 //TODO: change the parameter for a global number
-void Square::setCor(Uint32 _color){
+void Square::setCor(Uint64 _color){
 	this->color = _color;	
 }
 

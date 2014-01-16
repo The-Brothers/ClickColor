@@ -26,17 +26,19 @@ class Board{
 
 	//Board identificator
 	int boardNumber;
+	
 	//Least number of clicks to solve the board
 	int score;
 	int boardSize;
 
-	void buildBoard(string _levelLayout);
+	void buildBoard(string _levelLayout, SDL_Surface *screen);
 
 public: 
-	Board(int boardSize); //Constructor
-	Board(int boardNumber, int boardSize, int score, string levelLayout); //Constructor
+	Board(int boardSize, SDL_Surface *screen); //Constructor
+	Board(int boardNumber, int boardSize, int score, string levelLayout, SDL_Surface *screen); //Constructor
 	~Board();	//Destructor
-	void draw();	//Draw the Board on the screen
+	
+	void draw(SDL_Surface *screen);	//Draw the Board on the screen
 	void update();	//Do the Board logic
 	void nextLevel();	//Change the Board layout according to the next level
 	bool isClicked(int x, int y);	//Check if the board was clicked
