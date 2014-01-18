@@ -41,11 +41,8 @@ Game::Game(){
 	interface = util->loadImage("./data/image/ui.png");
 
 	//Build all the game boards that will be used by the game
-	//Have trouble understanding this code
-	//Might want to improve
 	boardbuilder = new BoardBuilder(screen);
 	//Load the first board
-	//Why not create a new board?
 	board = boardbuilder->getBoard(levelCounter);
 	//Sets the last level number
 	maxLevel = boardbuilder->numberOfLevels-1;
@@ -143,7 +140,7 @@ void Game::run(){
 		//FPS control
 		if(1000/FPS > SDL_GetTicks() - start)
 			//implicit conversion loses integer precision
-			SDL_Delay(1000/FPS - (SDL_GetTicks() - start));
+			SDL_Delay(1000/FPS - (int)(SDL_GetTicks() - start));
 	}
 }
 
@@ -201,9 +198,9 @@ void Game::nextLevel(){
 	victoryMessage->draw(screen);
 	SDL_UpdateWindowSurface(window);
 	//TODO: Remove this delay for a window message.
-	//SDL_Delay(1000) removed, just commented out actually
+	//SDL_Delay(1000);
 
-	if(levelCounter < this->maxLevel){
+	if(levelCounter < maxLevel){
 		//Resets the click count
 		clickCount = 0;
 
@@ -212,11 +209,11 @@ void Game::nextLevel(){
 		sprintf(temp,"%d", clickCount);
 		clicks->setText(string(temp));
 
-		//Resets the board
-		board = boardbuilder->getBoard(levelCounter);
-		
 		//Increments the level counter
 		levelCounter++;
+
+		//Resets the board
+		board = boardbuilder->getBoard(levelCounter);
 
 		//Update the level counter on the screen
 		sprintf(temp,"%d",this->levelCounter);
@@ -229,6 +226,6 @@ void Game::nextLevel(){
 		minimumClicks->update();
 
 	} else {
-		running=false; //When you reach the last level the game ends.
+		running = false; //When you reach the last level the game ends.
 	}
 }
