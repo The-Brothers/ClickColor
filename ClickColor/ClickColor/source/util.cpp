@@ -19,9 +19,7 @@ SDL_Surface* util::loadImage(const char* img){
 	}
 	
 	// Time to make the colorkeying
-    // TODO: Make a parameter where you pass the color you want to use for colokeying
-    // Load the color to do the colorkey
-    Uint32 colorkey = SDL_MapRGB(loadedImage->format,0xff,0x00,0xff);
+    uint32_t colorkey = setCustomColorKey(loadedImage, 0xff, 0x00, 0xff);
     // Apply the colorkey
     SDL_SetColorKey(loadedImage, SDL_TRUE, colorkey);
 	
@@ -33,4 +31,12 @@ SDL_Surface* util::loadImage(const char* img){
 
     //Return the optimized image
     return optimizedImage;
+}
+
+// 0xff,0x00,0xff
+
+// TODO: Make a parameter where you pass the color you want to use for colorkeying <- DONE?
+// Load the color to do the colorkey
+uint32_t util::setCustomColorKey(SDL_Surface *surfaceImage, uint32_t firstColorKey, uint32_t secondColorKey, uint32_t thirdColorKey) {
+	return SDL_MapRGB(surfaceImage->format, firstColorKey, secondColorKey, thirdColorKey);
 }

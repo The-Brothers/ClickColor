@@ -14,6 +14,7 @@ class util {
 		
 		//function to load images based on the name
 		SDL_Surface * loadImage(const char* img);
+		uint32_t setCustomColorKey(SDL_Surface *surfaceImage, uint32_t firstColorKey, uint32_t secondColorKey, uint32_t thirdColorKey);
 	
 	private:
 };

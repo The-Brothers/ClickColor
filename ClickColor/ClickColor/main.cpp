@@ -3,8 +3,9 @@
 int main(){
 	
 	Game * game;
-	game = new Game();
+	game = new Game(); // triggers constructor
 	
+	//run the game
 	game->run();
 	
 	delete game;

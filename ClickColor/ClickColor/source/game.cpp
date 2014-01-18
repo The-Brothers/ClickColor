@@ -11,45 +11,41 @@
 #include "board.h"
 #include "util.h"
 
-//Contructor
+//Contructor triggered will setup the game
 Game::Game(){
-	//Initialize all the SDL shit
-	if (!SDL_Init(SDL_INIT_EVERYTHING) < 0) {
-		cout << "Error initialising SDL! SDL error message: " << SDL_GetError() << endl;
-	}
-	//Initialise word TTF
-	TTF_Init();
-	
-	//Initialise IMG extension
-	int flags = IMG_INIT_PNG;
-	int init = IMG_Init(flags);
-	if (init != flags) {
-		cout << "Error!" << endl;
-	}
-	
+	init();
+
 	//Set the main window
 	window = SDL_CreateWindow(
-	"ClickColor",
-	SDL_WINDOWPOS_CENTERED,
-	SDL_WINDOWPOS_CENTERED,
-	SCREEN_W,
-	SCREEN_H,
-	SDL_WINDOW_SHOWN
+		"ClickColor",
+		SDL_WINDOWPOS_CENTERED,
+		SDL_WINDOWPOS_CENTERED,
+		SCREEN_W,
+		SCREEN_H,
+		SDL_WINDOW_SHOWN
 	);
+	
+	//THIS IS THE CODE THAT FIXED ALL THE BUGS! Game works now!
+	screen = SDL_GetWindowSurface(window);
 	
 	//Set the game running
 	running = true;
 
 	//Variable to count the number of clicks you made
 	clickCount = 0;
+	
+	//Variable to count the level so far
 	levelCounter = 0;
 
-	//Load the game interface
+	//Load the game user interface(SDL_Surface pointer)
 	interface = util->loadImage("./data/image/ui.png");
 
 	//Build all the game boards that will be used by the game
+	//Have trouble understanding this code
+	//Might want to improve
 	boardbuilder = new BoardBuilder(screen);
 	//Load the first board
+	//Why not create a new board?
 	board = boardbuilder->getBoard(levelCounter);
 	//Sets the last level number
 	maxLevel = boardbuilder->numberOfLevels-1;
@@ -79,9 +75,13 @@ Game::Game(){
 //Destructor
 Game::~Game(){
 	//Free the interface(game board) surface
-	SDL_FreeSurface(this->interface);
+	SDL_FreeSurface(interface);
 	//Free the screen surface
-	SDL_FreeSurface(this->screen);
+	SDL_FreeSurface(screen);
+	//Free the game window
+	SDL_DestroyWindow(window);
+	
+	delete boardbuilder;
 	
 	delete clicks;
 	delete currentLevel;
@@ -89,15 +89,30 @@ Game::~Game(){
 	delete victoryMessage;
 	
 	delete resetButton;
-	
-	//Free the game window
-	SDL_DestroyWindow(window);
+
 	//Close the TTF elements
 	TTF_Quit();
 	// Close the IMG elements
 	IMG_Quit();
 	//Quit the SDL elements
 	SDL_Quit();
+}
+
+void Game::init() {
+	//Initialize all the SDL shit
+	if (!SDL_Init(SDL_INIT_EVERYTHING) < 0) {
+		cout << "Error initialising SDL! SDL error message: " << SDL_GetError() << endl;
+	}
+	
+	//Initialise word TTF
+	TTF_Init();
+	
+	//Initialise IMG extension
+	int flags = IMG_INIT_PNG;
+	int init = IMG_Init(flags);
+	if (init != flags) {
+		cout << "Error!" << endl;
+	}
 }
 
 //main loop
@@ -127,6 +142,7 @@ void Game::run(){
 		SDL_UpdateWindowSurface(window);
 		//FPS control
 		if(1000/FPS > SDL_GetTicks() - start)
+			//implicit conversion loses integer precision
 			SDL_Delay(1000/FPS - (SDL_GetTicks() - start));
 	}
 }

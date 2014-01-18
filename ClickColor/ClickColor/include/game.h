@@ -30,9 +30,7 @@ class Game{
 	SDL_Event events; //the ingame events
 
 	bool running; //sets the game running
-
-	Uint32 start; //FPS control
-	
+	uint64_t start; //FPS control
 	util* util;
 
 	//The game board
@@ -50,6 +48,7 @@ class Game{
 	int clickCount;
 	int levelCounter;
 	int maxLevel;
+	
 	//This is used to store and manage all the levels
 	BoardBuilder* boardbuilder;
 
@@ -59,6 +58,8 @@ class Game{
 public:
 	Game(); //Constructor
 	~Game(); //Destructor
+	
+	void init();
 	
 	void run(); //THE GAME
 	void handleEvents();
