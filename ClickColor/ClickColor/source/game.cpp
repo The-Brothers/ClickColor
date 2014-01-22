@@ -25,7 +25,7 @@ Game::Game(){
 		SDL_WINDOW_SHOWN
 	);
 	
-	//THIS IS THE CODE THAT FIXED ALL THE BUGS! Game works now!
+	//Gets window surface to draw on screen
 	screen = SDL_GetWindowSurface(window);
 	
 	//Set the game running
@@ -40,33 +40,8 @@ Game::Game(){
 	//Load the game user interface(SDL_Surface pointer)
 	interface = util->loadImage("./data/image/ui.png");
 
-	//Build all the game boards that will be used by the game
-	boardbuilder = new BoardBuilder(screen);
-	//Load the first board
-	board = boardbuilder->getBoard(levelCounter);
-	//Sets the last level number
-	maxLevel = boardbuilder->numberOfLevels-1;
-	
-	//Initialize the text field where the clicks you make are written
-	clicks = new Gui("0",32,380,170);
-	clicks->setColor(BLACK);
-
-	//Initialize the current level 
-	currentLevel = new Gui("1",32,380,50);
-	currentLevel->setColor(BLACK);
-
-	//Initialize the minimum number of clicks needed to pass the level
-	char temp[5];
-	sprintf(temp,"%d", board->getScore());
-	minimumClicks = new Gui(temp,32,380,110);
-	minimumClicks->setColor(BLACK);
-	
-	//Initialize victory message 
-	victoryMessage = new Gui("You won!",32,340,290);
-	victoryMessage->setColor(RED);
-
-	//Initialize the reset button
-	resetButton = new Button("data/image/config.png",340,285);
+	setupGUI();
+	setupBoard();
 }
 
 //Destructor
@@ -110,6 +85,38 @@ void Game::init() {
 	if (init != flags) {
 		cout << "Error!" << endl;
 	}
+}
+
+void Game::setupGUI() {
+	//Initialize the text field where the clicks you make are written
+	clicks = new Gui("0",32,380,170);
+	clicks->setColor(BLACK);
+	
+	//Initialize the current level
+	currentLevel = new Gui("1",32,380,50);
+	currentLevel->setColor(BLACK);
+	
+	//Initialize the minimum number of clicks needed to pass the level
+	char temp[5];
+	sprintf(temp,"%d", board->getScore());
+	minimumClicks = new Gui(temp,32,380,110);
+	minimumClicks->setColor(BLACK);
+	
+	//Initialize victory message
+	victoryMessage = new Gui("You won!",32,340,290);
+	victoryMessage->setColor(RED);
+	
+	//Initialize the reset button
+	resetButton = new Button("data/image/config.png",340,285);
+}
+
+void Game::setupBoard() {
+	//Build all the game boards that will be used by the game
+	boardbuilder = new BoardBuilder(screen);
+	//Load the first board
+	board = boardbuilder->getBoard(levelCounter);
+	//Sets the last level number
+	maxLevel = boardbuilder->numberOfLevels - 1;
 }
 
 //main loop
