@@ -20,7 +20,7 @@ public:
 
 	void draw(SDL_Surface *screen);
 	void update();
-	void resetAction();
+	void action();
 
 	void isClicked(int x, int y);
 

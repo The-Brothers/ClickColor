@@ -59,15 +59,7 @@ public:
 	Game(); //Constructor
 	~Game(); //Destructor
 	
-	
 	void init();
-<<<<<<< HEAD
-	void setupBoard();
-	void setupGUI();
-=======
-	void setupGUI();
-	void setupBoard();
->>>>>>> origin/master
 	
 	void run(); //THE GAME
 	void handleEvents();

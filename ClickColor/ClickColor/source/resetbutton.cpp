@@ -8,8 +8,8 @@ Button::Button(const char* img, int _x, int _y){
 	this->box.x = _x;
 	this->box.y = _y;
 
-	this->box.w = image->w;
-	this->box.h = image->h;
+	this->box.w=this->image->w;
+	this->box.h=this->image->h;
 }
 
 Button::~Button(){
@@ -20,7 +20,7 @@ void Button::draw(SDL_Surface *screen){
 	SDL_BlitSurface(this->image,NULL,screen,&this->box);
 }
 
-void Button::resetAction(){
+void Button::action(){
 	cout<<"RESET action"<<endl;
 }
 
@@ -28,5 +28,5 @@ void Button::resetAction(){
 void Button::isClicked(int x, int y){
 	//if the mouse click is inside the board coordinates
 	if(((x >= this->box.x) && (x<= (this->box.x + this->box.w))) && ((y >= this->box.y) && (y<= (this->box.y + this->box.h))))
-		resetAction();
+		action();
 }

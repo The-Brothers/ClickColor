@@ -29,14 +29,14 @@ Board::Board(int boardSize, SDL_Surface *screen){
 }
 
 Board::Board(int _boardNumber, int _boardSize, int _score, string _levelLayout, SDL_Surface *screen){
-	box.x = 30;
-	box.y = 32;
-	box.w = BOARD_WIDTH;
-	box.h = BOARD_HEIGHT;
+	this->box.x = 30;
+	this->box.y = 32;
+	this->box.w = BOARD_WIDTH;
+	this->box.h = BOARD_HEIGHT;
 
-	boardNumber = _boardNumber;
-	boardSize = _boardSize;
-	score = _score;
+	this->boardNumber = _boardNumber;
+	this->boardSize = _boardSize;
+	this->score = _score;
 
 	buildBoard(_levelLayout, screen);
 }
@@ -49,7 +49,7 @@ Board::~Board(){
 //Draw the board on the game screen
 void Board::draw(SDL_Surface *screen){
 	//go throught the square vector and draw each one.
-	for(int i = 0; i < (int)squares.size(); i++){
+	for(int i=0;i<(int)squares.size();i++){
 		SDL_Rect temp = squares[i]->getBox(); //get the position and dimension of each square
 		SDL_FillRect(screen, &temp ,(Uint32)squares[i]->getCor()); //draw the square
 	}
@@ -60,7 +60,7 @@ void Board::update(){
 
 }
 
-//redesign the board to become the next level board
+//redesign the board to becomee the next level board
 void Board::nextLevel(){
 
 }
