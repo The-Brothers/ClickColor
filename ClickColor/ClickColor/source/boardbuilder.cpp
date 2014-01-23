@@ -24,29 +24,41 @@ BoardBuilder::BoardBuilder(SDL_Surface *screen){
 	int _boardSize;
 	int _score;
 	string _levelLayout;
-	numberOfLevels=0;
+	numberOfLevels = 0;
 	
+	//search and iterate through .map file for available levels
 	while(levelmap.getline(buffin,2)){
+		//if there's another level
 		if(buffin[0] == '-'){
+			//read level.map
 			levelmap.getline(buffin,2);
+			//set board number
 			_boardNumber = atoi(buffin);
     
-    		levelmap.getline(buffin,2);
-			_score = atoi(buffin);
-			
+			//read level.map
 			levelmap.getline(buffin,2);
+			//set board number
 			_boardSize = atoi(buffin);
+			
+			//read level.map
+    		levelmap.getline(buffin,2);
+			//set score
+			_score = atoi(buffin);
 
-			levelmap.getline(buffin,_boardSize*_boardSize+1);
+			//read level.map
+			levelmap.getline(buffin, _boardSize * _boardSize + 1);
+			//sets out the level layout
 			_levelLayout = string(buffin);
 			
 			//push board vector for new board
+			//push new board into vector to set it up
 			boards.push_back(new Board(_boardNumber,  _boardSize,  _score, _levelLayout, screen));
 			//increment the level number
 			numberOfLevels++;
 		}	
 	}
 	
+	// if there are no more available levels, increment number of levels
 	numberOfLevels++;
 }
 
@@ -55,7 +67,7 @@ BoardBuilder::~BoardBuilder(){
 
 Board* BoardBuilder::getBoard(int _level){
 	//level must be between 0 and the max number of levels	
-	if(_level >= 0 && _level < this->numberOfLevels) {
+	if(_level >= 0 && _level < numberOfLevels) {
 		return boards.at(_level); //Return the board at _level position on the boards vector
 	}
 	
@@ -64,5 +76,5 @@ Board* BoardBuilder::getBoard(int _level){
 
 //Set the minimum number of clicks of a level and write it on the levels file
 // void BoardBuilder::setScore(int _score){
-	
-// }
+
+//}

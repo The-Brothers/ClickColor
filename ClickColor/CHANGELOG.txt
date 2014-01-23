@@ -1,7 +1,16 @@
 CHANGELOG
 
+<<<<<<< HEAD
 Jan 23 2013
 * Game running on mac, some issues with variables
+=======
+Jan 22 2013 
+* Cleaned up some code to make it more readable
+* Game does not reset after done with level
+
+Jan 18 2013
+* Got game running on mac os x mavericks
+>>>>>>> origin/master
 
 Jan 16 2013
 * Added IMG header files

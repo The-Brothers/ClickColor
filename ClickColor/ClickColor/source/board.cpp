@@ -29,14 +29,14 @@ Board::Board(int boardSize, SDL_Surface *screen){
 }
 
 Board::Board(int _boardNumber, int _boardSize, int _score, string _levelLayout, SDL_Surface *screen){
-	this->box.x = 30;
-	this->box.y = 32;
-	this->box.w = BOARD_WIDTH;
-	this->box.h = BOARD_HEIGHT;
+	box.x = 30;
+	box.y = 32;
+	box.w = BOARD_WIDTH;
+	box.h = BOARD_HEIGHT;
 
-	this->boardNumber = _boardNumber;
-	this->boardSize = _boardSize;
-	this->score = _score;
+	boardNumber = _boardNumber;
+	boardSize = _boardSize;
+	score = _score;
 
 	buildBoard(_levelLayout, screen);
 }
@@ -60,7 +60,7 @@ void Board::update(){
 
 }
 
-//redesign the board to becomee the next level board
+//redesign the board to become the next level board
 void Board::nextLevel(){
 
 }
