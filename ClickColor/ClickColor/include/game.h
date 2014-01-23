@@ -60,6 +60,8 @@ public:
 	~Game(); //Destructor
 	
 	void init();
+	void setupBoard();
+	void setupGUI();
 	
 	void run(); //THE GAME
 	void handleEvents();

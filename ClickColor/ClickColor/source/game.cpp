@@ -40,33 +40,8 @@ Game::Game(){
 	//Load the game user interface(SDL_Surface pointer)
 	interface = util->loadImage("./data/image/ui.png");
 
-	//Build all the game boards that will be used by the game
-	//Have trouble understanding this code
-	//Might want to improve
-	boardbuilder = new BoardBuilder(screen);
-	//Load the first board
-	//Why not create a new board?
-	board = boardbuilder->getBoard(levelCounter);
-	//Sets the last level number
-	maxLevel = boardbuilder->numberOfLevels-1;
-	
-	//Initialize the text field where the clicks you make are written
-	clicks = new Gui("0",32,380,170);
-	clicks->setColor(BLACK);
-
-	//Initialize the current level 
-	currentLevel = new Gui("1",32,380,50);
-	currentLevel->setColor(BLACK);
-
-	//Initialize the minimum number of clicks needed to pass the level
-	char temp[5];
-	sprintf(temp,"%d", board->getScore());
-	minimumClicks = new Gui(temp,32,380,110);
-	minimumClicks->setColor(BLACK);
-	
-	//Initialize victory message 
-	victoryMessage = new Gui("You won!",32,340,290);
-	victoryMessage->setColor(RED);
+	setupBoard();
+	setupGUI();
 
 	//Initialize the reset button
 	resetButton = new Button("data/image/config.png",340,285);
@@ -115,6 +90,35 @@ void Game::init() {
 	}
 }
 
+void Game::setupBoard() {
+	//Build all the game boards that will be used by the game
+	boardbuilder = new BoardBuilder(screen);
+	//Load the first board
+	board = boardbuilder->getBoard(levelCounter);
+	//Sets the last level number
+	maxLevel = boardbuilder->numberOfLevels-1;
+}
+
+void Game::setupGUI() {
+	//Initialize the text field where the clicks you make are written
+	clicks = new Gui("0",32,380,170);
+	clicks->setColor(BLACK);
+	
+	//Initialize the current level
+	currentLevel = new Gui("1",32,380,50);
+	currentLevel->setColor(BLACK);
+	
+	//Initialize the minimum number of clicks needed to pass the level
+	char temp[5];
+	sprintf(temp,"%d", board->getScore());
+	minimumClicks = new Gui(temp,32,380,110);
+	minimumClicks->setColor(BLACK);
+	
+	//Initialize victory message
+	victoryMessage = new Gui("You won!",32,340,290);
+	victoryMessage->setColor(RED);
+}
+
 //main loop
 void Game::run(){
 
@@ -123,14 +127,20 @@ void Game::run(){
 		handleEvents();
 		//Logic
 		board->update();
+		//continue to render the font
 		clicks->update();
 
 		//Render -> draw on the screen surface
 		SDL_BlitSurface(interface,NULL,screen,NULL);
+		//draw the board
 		board->draw(screen);
+		//render the clicks
 		clicks->draw(screen);
+		//draw current level
 		currentLevel->draw(screen);
+		//draw minimum clicks label
 		minimumClicks->draw(screen);
+		//draw the reset button
 		resetButton->draw(screen);
 
 		//Check if all the squares have the same color
@@ -143,7 +153,9 @@ void Game::run(){
 		//FPS control
 		if(1000/FPS > SDL_GetTicks() - start)
 			//implicit conversion loses integer precision
-			SDL_Delay(1000/FPS - (SDL_GetTicks() - start));
+			
+			//SDL_Delay(1000/FPS - (uint32-t)(SDL_GetTicks() - start)); causes game to appear and disappear
+			SDL_Delay(1000/FPS - (SDL_GetTicks() - start)); //this works fine
 	}
 }
 

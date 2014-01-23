@@ -49,7 +49,7 @@ Board::~Board(){
 //Draw the board on the game screen
 void Board::draw(SDL_Surface *screen){
 	//go throught the square vector and draw each one.
-	for(int i=0;i<(int)squares.size();i++){
+	for(int i = 0; i < (int)squares.size(); i++){
 		SDL_Rect temp = squares[i]->getBox(); //get the position and dimension of each square
 		SDL_FillRect(screen, &temp ,(Uint32)squares[i]->getCor()); //draw the square
 	}
