@@ -1,8 +1,12 @@
 CHANGELOG
 
-Jan 15 2013
-* Restructured SDL and SDL_ttf header files
+Jan 23 2013
+* Game running on mac, some issues with variables
 
 Jan 16 2013
 * Added IMG header files
 * Migrated half of game to SDL 2.0.1
+
+Jan 15 2013
+* Restructured SDL and SDL_ttf header files
+
