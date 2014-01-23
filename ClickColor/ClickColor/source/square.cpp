@@ -6,8 +6,9 @@ using namespace std;
 //Constructor
 Square::Square(int cor, int _x, int _y, int _w, int _h, int _i, int _j, SDL_Surface *screen){
 	//TODO: Put this somewherelse
-	//color1 = SDL_MapRGB(screen->format,0xc9,0x53,0x87);
-	//color2 = SDL_MapRGB(screen->format,0xcd,0xdb,0x74);
+	//this works in mac os x
+	color1 = SDL_MapRGB(screen->format,0xc9,0x53,0x87);
+	color2 = SDL_MapRGB(screen->format,0xcd,0xdb,0x74);
 
 	//Choose the color based on the parameter
 	if(cor==1)
