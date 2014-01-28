@@ -27,7 +27,7 @@ Authors
 	Leonn Ferreira
 	Athos Ribeiro
 	Rodrigo Rincon
-	Matheus Furquim
+	Mateus Furquim
 	Victor Cotrim	
 
 Changelog:
