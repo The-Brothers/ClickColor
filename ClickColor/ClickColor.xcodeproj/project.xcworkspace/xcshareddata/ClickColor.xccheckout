@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>C1F56FE5-45EF-4064-B83B-CD2EB91A6E6F</string>
+	<key>IDESourceControlProjectName</key>
+	<string>ClickColor</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>53ECB6BD-95E9-46F6-A0BF-531BFCFB030E</key>
+		<string>https://github.com/muhdmirzamz/ClickColor.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>ClickColor/ClickColor.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>53ECB6BD-95E9-46F6-A0BF-531BFCFB030E</key>
+		<string>../../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/muhdmirzamz/ClickColor.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>53ECB6BD-95E9-46F6-A0BF-531BFCFB030E</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>53ECB6BD-95E9-46F6-A0BF-531BFCFB030E</string>
+			<key>IDESourceControlWCCName</key>
+			<string>ClickColor</string>
+		</dict>
+	</array>
+</dict>
+</plist>

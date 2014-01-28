@@ -1,0 +1,12 @@
+CHANGELOG
+
+Jan 23 2013
+* Game able to run on mac os x mavericks
+* Some variable issues
+
+Jan 15 2013
+* Restructured SDL and SDL_ttf header files
+
+Jan 16 2013
+* Added IMG header files
+* Migrated half of game to SDL 2.0.1
